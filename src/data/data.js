@@ -53,7 +53,19 @@ export const componentItem = [
       'Placa de Video Palit NVIDIA GeForce GTX 1660 DUAL 6GB GDDR5',
     price: 65000,
   },
-]
+];
+
+export const arraySections = [
+  {
+    section: 'Placa de video',
+  },
+  {
+    section: 'Motherboard',
+  },
+  {
+    section: 'Microprocesador',
+  },
+];
 
 export const Components = componentItem.reduce((res, comp) => {
   if (!res[comp.section]) {
