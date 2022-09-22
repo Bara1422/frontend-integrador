@@ -1,26 +1,26 @@
 import styled from 'styled-components';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 export const CartIconContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   cursor: pointer;
   position: relative;
 `;
 
-export const CartIconStyled = styled(ShoppingCartIcon)`
+export const CartIconStyled = styled(ShoppingBagIcon)`
   width: 45px;
   height: 45px;
+  
 `;
 
 export const ItemCount = styled.div`
-  position: absolute;
-  top: -10px;
-  right: -10px;
+  
   border-radius: 50%;
-  background-color: ${(props) => props.theme.red};
-  font-size: 10px;
+  
+  font-size: 12px;
   font-weight: bold;
   width: 20px;
   height: 20px;

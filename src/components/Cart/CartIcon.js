@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReactComponent as ShoppingIcon } from '../../assets/img/cart-icon.svg'
-import { CartIconStyled, ItemCount } from './CartIconElements'
+import { CartIconStyled, ItemCount, CartIconContainer } from './CartIconElements'
 import { useDispatch, useSelector } from 'react-redux'
 import * as cartActions from '../../redux/cart/cart-actions'
 
@@ -13,12 +13,14 @@ export const CartIcon = () => {
 
   return (
     <div>
-      <CartIconStyled onClick={handlerToggle}>
-        <ShoppingIcon
-          style={{ width: '24px', height: '24px' }}
-        />
+      <CartIconContainer onClick={handlerToggle}>
+        <CartIconStyled >
+          <ShoppingIcon
+            style={{ width: '24px', height: '24px' }}
+          />
+        </CartIconStyled>
         <ItemCount>{quantity}</ItemCount>
-      </CartIconStyled>
+      </CartIconContainer>
     </div>
   )
 }

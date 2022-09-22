@@ -26,9 +26,9 @@ export const Menu = ({ openComponents }) => {
     Components = { [section]: Components[section] }
   }
 
-  const addToOrder = () => {
-    dispatch(cartActions.addItem(openComponents))
-    console.log(openComponents)
+  const addToOrder = (component) => {
+    dispatch(cartActions.addItem(component))
+    console.log(component)
   }
 
   return (
@@ -58,7 +58,7 @@ export const Menu = ({ openComponents }) => {
             <Component img={component.img} >
               <h5>{component.name}</h5>
               <p>{formatPrice(component.price)}</p>
-              <AddToCardButton onClick={addToOrder}>Agregar al carrito</AddToCardButton>
+              <AddToCardButton onClick={() => addToOrder(component)}>Agregar al carrito</AddToCardButton>
               {console.log(addToOrder)}
             </Component>
           </ComponentCard>
