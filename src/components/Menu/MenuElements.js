@@ -3,9 +3,9 @@ import { Title } from '../UI/Title'
 
 export const ComponentGrid = styled.div`
   display: grid;
- 
+
   margin: 0 auto;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
   text-align: center;
   justify-items: center;
   gap: 20px;
@@ -104,14 +104,15 @@ export const TagCard = styled.div`
   margin: 20px;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  color: #000;
-  font-weight: bold;
-  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.09);
-  border-radius: 15px;
-  padding: 1rem;
+  background: ${({ selected }) => (selected ? "#e8e8e8" : "#fff")};
+color: #000;
+font-weight: bold;
+box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.09);
+border-radius: 15px;
+padding: 1rem;
+cursor: pointer;
   &:hover {
-    background: #e8e8e8;
-    box-shadow: none;
-  }
+  background: #e8e8e8;
+  box-shadow: none;
+}
 `;

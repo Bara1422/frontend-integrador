@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Title } from "../UI/Title";
 import { ComponentLabel } from '../Menu/MenuElements';
 
@@ -57,14 +57,15 @@ export const DialogFooter = styled.div`
 `;
 
 export const ConfirmButton = styled(Title)`
+  
   margin: 10px;
-  color: white;
+  color: ${(props) => (props.disabled === 'disabled' ? '#979797' : '#fff')};
   height: auto;
   border-radius: 8px;
   padding: 10px;
   width: 200px;
-  cursor: pointer;
-  background-color: red;
+  cursor: ${(props) => (props.disabled === 'disabled' ? 'not-allowed' : 'pointer')};
+  background-color: ${(props) => (props.disabled === 'disabled' ? '#ccc' : 'red')};
   text-align: center;
   &:hover {
     opacity: 0.7;
@@ -72,11 +73,14 @@ export const ConfirmButton = styled(Title)`
   &:active {
     opacity: 1;
   }
+  &:disabled {
+    opacity: 0.4;
+  }
 `;
 
 export const DialogShadow = styled.div`
   position: fixed;
-  height: calc(100% - 75px);
+  height: calc(100%);
   width: 100%;
   background-color: #000000e6;
   z-index: 4;

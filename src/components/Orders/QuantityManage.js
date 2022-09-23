@@ -2,7 +2,7 @@ import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Title } from '../UI/Title';
 import styled from 'styled-components';
-import { nucbazapiRed } from '../../Styles/utilities';
+
 import { formatPrice } from '../../data/data';
 import RemoveIcon from '../../assets/img/delete-full.svg';
 import * as cartActions from '../../redux/cart/cart-actions';
@@ -30,7 +30,7 @@ const QuantityStyled = styled.span`
 
 const QuantityButton = styled.div`
   width: 23px;
-  color: ${nucbazapiRed};
+  color: red;
   font-size: 20px;
   text-align: center;
   cursor: pointer;
