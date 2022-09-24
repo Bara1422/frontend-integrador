@@ -1,15 +1,21 @@
 import styled from "styled-components";
+import { below } from "../../Styles/utilities";
 import { Title } from '../UI/Title'
 
 export const ComponentGrid = styled.div`
   display: grid;
-
   margin: 0 auto;
   grid-template-columns: 1fr 1fr auto;
   text-align: center;
   justify-items: center;
   gap: 20px;
   padding: 50px;
+  ${below.xlarge`
+    grid-template-columns:1fr 1fr;
+  `}
+  ${below.large`
+    grid-template-columns: 1fr;
+  `}
 `;
 
 export const Component = styled.div`
@@ -55,6 +61,9 @@ export const ComponentsStyled = styled.div`
     text-align: center;
     font-size: 40px;
   }
+  ${below.small`
+    margin: 0;
+  `}
 `
 
 export const ComponentCard = styled.div`
@@ -97,6 +106,12 @@ export const TagsMenu = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-bottom: 20px;
+  ${below.large`
+    flex-wrap: wrap;
+  `}
+  ${below.small`
+    display: block;
+  `}
 `;
 
 export const TagCard = styled.div`

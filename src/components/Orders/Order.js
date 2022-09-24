@@ -5,6 +5,7 @@ import { DialogFooter, ConfirmButton, DialogShadow } from '../ComponentDialog/Co
 import { useSelector, useDispatch } from 'react-redux'
 import { QuantityManage } from './QuantityManage'
 import * as cartActions from '../../redux/cart/cart-actions'
+import { Link } from 'react-router-dom'
 
 
 export const Order = () => {
@@ -41,14 +42,15 @@ export const Order = () => {
         </OrderContent>
 
         <DialogFooter>
-
-          {
-            cartItems?.length === 0 ? (
-              <ConfirmButton disabled={'disabled'}>Ir a pagar {formatPrice(total)}</ConfirmButton>
-            ) : (
-              <ConfirmButton >Ir a pagar {formatPrice(total)}</ConfirmButton>
-            )
-          }
+          <Link to='/checkout' onClick={handleToggle}>
+            {
+              cartItems?.length === 0 ? (
+                <ConfirmButton disabled={'disabled'}>Ir a pagar {formatPrice(total)}</ConfirmButton>
+              ) : (
+                <ConfirmButton >Ir a pagar {formatPrice(total)}</ConfirmButton>
+              )
+            }
+          </Link>
         </DialogFooter>
       </OrderStyled>
     </>

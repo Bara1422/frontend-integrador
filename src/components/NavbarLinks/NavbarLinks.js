@@ -12,7 +12,7 @@ export const NavbarLinks = () => {
           <li>
             <LinkScroll
               activeClass="active"
-              to="#about"
+              to="about"
               spy={true}
               smooth={true}
               duration={500}
@@ -23,7 +23,14 @@ export const NavbarLinks = () => {
             <Link to='/products'>Productos</Link>
           </li>
           <li>
-            <a href='#contacto'>Contacto</a>
+            <LinkScroll
+              activeClass="active"
+              to="contacto"
+              spy={true}
+              smooth={true}
+              duration={500}
+              style={{ cursor: 'pointer' }}
+            >Contacto</LinkScroll>
           </li>
         </ul>
 

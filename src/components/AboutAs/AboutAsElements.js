@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { below } from "../../Styles/utilities";
 
 export const AboutAsStyled = styled.div`
   text-align: center;
@@ -15,6 +16,10 @@ export const AboutAsStyled = styled.div`
     margin: 0 auto;
     font-size: 2rem;
     text-align: center;
+    ${below.large`
+      font-size: 1.2rem;
+      width: 80%
+    `}
   }
 `;
 
