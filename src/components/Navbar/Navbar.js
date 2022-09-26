@@ -1,9 +1,12 @@
 import React from 'react'
-import { NavbarStyled, Logo, LinkStyled, NavigationMenu } from './NavbarElements'
+import { NavbarStyled, Logo, LinkStyled, NavigationMenu, Divider, LoginButton } from './NavbarElements'
 import img_Logo from '../../assets/img/Computer_n_screen.svg.png'
 import { CartIcon } from '../Cart/CartIcon'
 import { useDispatch } from 'react-redux'
 import * as cartActions from '../../redux/cart/cart-actions'
+import { Link } from 'react-router-dom'
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const Navbar = () => {
   const dispatch = useDispatch()
@@ -20,6 +23,11 @@ export const Navbar = () => {
       </LinkStyled>
       <NavigationMenu>
         <CartIcon />
+        <Divider />
+        <LinkStyled to='/login'>
+          <LoginButton>Ingresar</LoginButton>
+        </LinkStyled>
+        <AccountCircleIcon fontSize='large' style={{ cursor: 'pointer' }} />
       </NavigationMenu>
     </NavbarStyled>
   );

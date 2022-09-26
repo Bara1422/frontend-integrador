@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { below } from '../../Styles/utilities';
 
 export const LayoutPage = styled.div`
   max-width: 1440px;
@@ -17,4 +18,15 @@ export const Wrapper = styled.div`
   justify-content: space-around;
   max-width: 1440px;
   padding: 150px;
+  form {
+    ${below.small`
+      width: 100%;
+    `}
+  }
+  ${below.large`
+    padding: 150px 0px;
+  `}
+  ${below.small`
+    width: 100%;
+  `}
 `;

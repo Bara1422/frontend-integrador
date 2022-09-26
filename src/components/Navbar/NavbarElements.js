@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { below } from '../../Styles/utilities';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const NavbarStyled = styled.div`
   padding: 20px;
@@ -15,7 +16,8 @@ export const NavbarStyled = styled.div`
   color: #fff;
   border-bottom: 1px solid #e5edef;
   ${below.small`
-    padding-left: 5px
+    padding-left: 5px;
+    display: block;
   `}
 `;
 
@@ -34,15 +36,44 @@ export const Logo = styled.img`
   `}
 `;
 
+
+
+export const Divider = styled.div`
+  display: inline-block;
+  border-left: 1px solid #dfdddd;
+  margin: 0 25px;
+  height: 25px;
+`
+export const LoginButton = styled.button`
+  cursor: pointer;
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 15px;
+  border: none;
+  font-size: 13px;
+  height: 35px;
+  margin: 0 5px;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid #BC02CB;
+  background-color: #000;
+  &:hover {
+    color: #BC02CB;
+    border: 1px solid #fff
+  }
+`
+
 export const NavigationMenu = styled.div`
   display: flex;
   padding: 15px;
-  align-self: flex-end;
+  align-self: center;
   justify-content: flex-end;
   margin-right: 20px;
   ${below.large`
     margin-right: 0px;
     padding-right: 0px;
+  `}
+  ${below.small`
+    padding-top: 1.5rem;
   `}
 `
 
@@ -50,6 +81,9 @@ export const LinkStyled = styled(Link)`
   max-height: 100%;
   height: 100%;
   display: flex;
+  ${below.small`
+    justify-content: center;
+  `}
   h2 {
     padding-left: 10px;
     font-size: 2.5rem;
@@ -64,7 +98,7 @@ export const LinkStyled = styled(Link)`
       font-size: 2rem;
     `}
     ${below.small`
-      font-size: 1.8rem;
+      font-size: 2rem;
     `}
   }
 `;

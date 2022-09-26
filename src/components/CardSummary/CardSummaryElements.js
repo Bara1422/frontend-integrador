@@ -15,7 +15,7 @@ export const CardSummaryStyled = styled.div`
 
 export const CardSummaryContent = styled.div`
   padding: 24px 32px 15px;
-  border-radius: 15px 15px;
+  border-radius: 0px 0px 15px 15px;
   background-color: #fff;
 `;
 
@@ -43,5 +43,5 @@ export const TotalCard = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0px;
 `;

@@ -5,6 +5,7 @@ export const FormStyled = styled.form`
   max-width: 600px;
   z-index: 10;
   justify-self: center;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +17,7 @@ export const FormStyled = styled.form`
 
 export const FormSectionStyled = styled.div`
   padding: 30px;
-  border-radius: 15px 15px;
+  border-radius: 15px 15px 0px 0px;
   background-color: #fff;
   box-shadow: 0 6px 10px 0 rgba(128, 98, 96, 0.16);
   width: 100%;

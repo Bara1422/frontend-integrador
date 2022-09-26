@@ -17,7 +17,7 @@ const Contact = () => {
   return (
     <FormContainerStyled>
       <FormStyled onSubmit={handleSubmit(customSubmit, onError)}>
-        <FormTitleStyled id='contacto'>Contactanos</FormTitleStyled>
+        <FormTitleStyled id='contact'>Contactanos</FormTitleStyled>
         <InputStyled
           placeholder='Nombre'
           type='text'

@@ -60,6 +60,9 @@ export const CopyrightStyled = styled.section`
     a{
       margin-left: 10px;
       color: white;
+      &:hover {
+        color: #bbb;
+      }
     }
   }
 `

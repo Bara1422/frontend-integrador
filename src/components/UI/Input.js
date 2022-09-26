@@ -113,9 +113,9 @@ export const Input = (props) => {
     });
   };
 
-  /* console.log('TOUCHE', inputState.isTouche);
+  console.log('TOUCHE', inputState.isTouche);
   console.log('Valid', inputState.isValid);
-  console.log('FINAL', !inputState.isValid && inputState.isTouche); */
+  console.log('FINAL', !inputState.isValid && inputState.isTouche);
 
   return (
     <FromControl>

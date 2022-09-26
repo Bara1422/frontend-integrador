@@ -25,7 +25,7 @@ export const NavbarLinks = () => {
           <li>
             <LinkScroll
               activeClass="active"
-              to="contacto"
+              to="contact"
               spy={true}
               smooth={true}
               duration={500}

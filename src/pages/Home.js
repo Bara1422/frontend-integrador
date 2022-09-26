@@ -16,7 +16,7 @@ const Home = () => {
         <p>Al mejor PRECIO</p>
       </Banner>
       <NavbarLinks />
-      <AboutAs id='about' />
+      <AboutAs />
       <Contact />
       <Footer />
     </>
