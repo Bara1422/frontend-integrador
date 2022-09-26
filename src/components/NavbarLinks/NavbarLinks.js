@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { NavbarStyled } from './NavbarLinksElements'
-import { Link as LinkScroll, animeteScroll as scroll } from 'react-scroll'
+import { Link as LinkScroll } from 'react-scroll'
 
 
 export const NavbarLinks = () => {

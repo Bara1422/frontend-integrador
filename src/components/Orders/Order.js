@@ -33,7 +33,7 @@ export const Order = () => {
                 <ItemImg img={item.img} />
                 <div>
                   <div>{item.name}</div>
-                  {formatPrice(item.price * item.quantity)}
+                  <p>{formatPrice(item.price * item.quantity)}</p>
                 </div>
                 <QuantityManage item={item} />
               </OrderItem>

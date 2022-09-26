@@ -8,10 +8,7 @@ import {
   TagCard,
   TagsMenu,
 } from './MenuElements'
-import { componentItem } from '../../data/data'
 import { formatPrice } from '../../utils/formatPrice'
-
-import { useOpenComponents } from '../../hooks/useOpenComponents'
 import { useSelector, useDispatch } from 'react-redux'
 import * as cartActions from '../../redux/cart/cart-actions'
 
@@ -67,9 +64,8 @@ export const Menu = () => {
             )
           })
         }
-
-
       </ComponentGrid>
     </ComponentsStyled>
   )
+
 }

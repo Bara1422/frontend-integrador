@@ -6,10 +6,11 @@ export const FooterContainerStyled = styled.section`
   display: flex;
   padding: 1rem;
   background-color: #000;
-`
+  width: 100%;
+`;
+
 export const FooterMenuStyled = styled.div`
   color: #fff;
- 
   margin: 0 auto;
   text-align: end;
   display: flex;
@@ -45,13 +46,21 @@ export const CopyrightStyled = styled.section`
   color: #ddd;
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-end;
   padding-left: 5rem;
+  flex-direction: column;
   ${below.small`
     padding-left: 0rem;
   `}
   h6 {
     font-size: 0.8rem;
+  }
+  div{
+    margin-bottom: 10px;
+    a{
+      margin-left: 10px;
+      color: white;
+    }
   }
 `
 

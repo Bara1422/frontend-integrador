@@ -35,6 +35,12 @@ export const OrderItem = styled.div`
   display: grid;
   grid-template-columns: 50px 100px 100px;
   justify-content: space-between;
+  div{
+    p{
+      color: green;
+      font-weight: bold;
+    }
+  }
 `;
 
 export const ItemImg = styled.div`

@@ -70,6 +70,7 @@ export const SubmitStyled = styled.button`
     margin: 0 auto;
     border-radius: 5px;
     text-align: center;
+    border: none;
     padding: 0.5rem;
     background-color: #000;
     color: #fff;
@@ -80,6 +81,5 @@ export const SubmitStyled = styled.button`
     `}
   &:hover {
     color: #BC02CB;
-  
-  }
+  };
 `

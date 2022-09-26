@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import './App.css';
-import { GlobalStyle } from './Styles/GlobalStyle'
-import { Navbar } from './components/Navbar/Navbar'
+import { GlobalStyle } from './Styles/GlobalStyle';
+import { Navbar } from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Order } from './components/Orders/Order'
-import { Products } from './pages/Products'
+import { Order } from './components/Orders/Order';
+import { Products } from './pages/Products';
 import Checkout from './pages/Checkout';
-import Home from './pages/Home'
+import Home from './pages/Home';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -22,6 +23,6 @@ function App() {
     </Router>
 
   );
-}
+};
 
 export default App;

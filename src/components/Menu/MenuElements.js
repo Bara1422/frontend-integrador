@@ -38,7 +38,7 @@ export const Component = styled.div`
   transition-duration: 0.1s;
   box-shadow: 0px 0px 2px 0px grey;
   &:hover {
-    cursor: pointer;
+    cursor: default;
     filter: contrast(100%);
     box-shadow: 0px 0px 15px 0px grey;
     margin-top: 0px;
@@ -47,16 +47,21 @@ export const Component = styled.div`
     font-size: 15px;
     padding: 5px;
   }
+  p {
+    color: green;
+    font-weight: bold;
+  }
 `;
 
 export const ComponentsStyled = styled.div`
   height: 200px;
-  margin: 0px 20px 50px 20px;
+  margin: 0;
   padding-top: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 3;
+  user-select: none;
   & h3 {
     text-align: center;
     font-size: 40px;
@@ -70,6 +75,7 @@ export const ComponentCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
 `
 export const AddToCardButton = styled.div`
   margin: 10px;
