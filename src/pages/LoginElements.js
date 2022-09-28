@@ -13,3 +13,12 @@ export const GoogleButton = styled(CustomButton)`
   justify-content: space-around;
   background-color: #ff4d94;
 `
+
+export const ALink = styled.a`
+  color: red;
+  margin-left: 5px;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
