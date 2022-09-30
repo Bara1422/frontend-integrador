@@ -1,11 +1,11 @@
 import { CustomButton } from '../UI'
 import { CardContainer, CardSummaryContent, LiCard, RowCard, TotalCard, UlCard } from './CardSummaryElements'
 import { formatPrice } from '../../utils/formatPrice'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { COSTO_ENVIO } from '../../utils/ShippingCost'
+import { style } from '@mui/system'
 
-export const CardSummary = ({ isValid }) => {
-  const totalItems = useSelector(state => state.cart.cartItems.reduce((acc, cartItem) => acc + cartItem.price * cartItem.quantity, 0))
+export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
 
   return (
     <CardContainer>
@@ -13,19 +13,20 @@ export const CardSummary = ({ isValid }) => {
         <UlCard>
           <LiCard>
             <p>Costo de productos</p>
-            <span>{formatPrice(totalItems)}</span>
+            <span>{formatPrice(subTotal)}</span>
           </LiCard>
           <LiCard>
             <p>Costo de envío</p>
-            <span>{formatPrice(COSTO_ENVIO)}</span>
+            <span>{formatPrice(envio)}</span>
           </LiCard>
           <RowCard />
           <TotalCard>
             <h4>Total</h4>
-            <h4>{formatPrice(totalItems + COSTO_ENVIO)}</h4>
+            <h4>{formatPrice(subTotal + envio)}</h4>
           </TotalCard>
         </UlCard>
-        <CustomButton w='100%' m='0px' disabled={isValid}>
+
+        <CustomButton onClick={handlerSubmit} w='100%' m='0px' disabled={isValid} >
           Pagar
         </CustomButton>
       </CardSummaryContent>

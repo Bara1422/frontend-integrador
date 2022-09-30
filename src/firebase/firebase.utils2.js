@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, addDoc, getDocs, setDoc } from "firebase/firestore";
+import { getFirestore, doc, addDoc, getDocs, setDoc, collection, query, where, orderBy } from "firebase/firestore";
 import { get } from "react-scroll/modules/mixins/scroller";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -13,28 +13,36 @@ const firebaseConfig = {
   appId: "1:248856288967:web:311c6feace5ad786fae8e2"
 };
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
+export const getOrders = async (userId) => {
+  console.log(userId)
+  const orderRef = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('createdAt', 'desc'));
+  console.log(orderRef)
 
-  const userRef = doc(db, `users`, `${userAuth.uid}`);
-  const snapShot = await getDocs(userRef);
-  console.log(additionalData);
+ /*  let querySnapshot = await getDocs(orderRef);
+  querySnapshot.forEach((doc) => {
+    querySnapshot = [...querySnapshot, { id: doc.id, ...doc.data() }]
+    console.log(doc.id, '>>>', doc.data())
+  })
 
-  if (!snapShot.exists()) {
-    const { displayName, email, uid } = userAuth;
-
-    try {
-      await setDoc(userRef, {
-        displayName,
-        email,
-        uid,
-        ...additionalData,
-      });
-    } catch (error) {
-      console.log('Error creating user', error.message);
+  return querySnapshot
+} */
+let orders = await getDocs(orderRef)
+  .then((querySnapshot) => {
+    let orders = [];
+    querySnapshot.forEach((doc) => {
+      orders = [...orders, { id: doc.id, ...doc.data() }]
+      console.log(doc.uid)
+      console.log(doc.data())
+      console.log(orders)
     }
-  }
-  return userRef;
+    );
+    return orders;
+
+  }).catch((error) => {
+    console.log('error', error)
+  })
+console.log(orders)
+return orders
 }
 
 const app = initializeApp(firebaseConfig);

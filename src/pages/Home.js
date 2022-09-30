@@ -6,8 +6,9 @@ import { AboutAs } from '../components/AboutAs/AboutAs'
 import Contact from '../components/Contact/Contact'
 import { Link as LinkScroll } from 'react-scroll'
 import Footer from '../components/Footer/Footer'
-
 const Home = () => {
+  
+
   return (
     <>
       <Navbar />

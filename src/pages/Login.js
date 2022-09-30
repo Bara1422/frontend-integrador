@@ -8,9 +8,8 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth, db, createUserProfileDocument } from '../firebase/firebase.utils2'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile } from "firebase/auth";
-import { addDoc, setDoc, doc, collection, getDoc } from "firebase/firestore";
-import { set } from "react-hook-form";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile, setPersistence, inMemoryPersistence } from "firebase/auth";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import * as userActions from '../redux/user/user-actions'
 
 
@@ -42,10 +41,12 @@ const Login = () => {
     await signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
+        const createdAt = new Date()
         const docRef = setDoc(doc(db, 'users', user.uid), {
           displayName: user.displayName,
           email: user.email,
-          uid: user.uid
+          uid: user.uid,
+          createdAt: createdAt,
         })
         console.log(user)
         dispatch(userActions.setCurrentUser(user))
@@ -98,7 +99,6 @@ const Login = () => {
           })
           dispatch(userActions.setCurrentUser(user))
           console.log(user)
-
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -109,13 +109,16 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           const dpName = formState.inputs.nombre.value
+          const createdAt = new Date()
           setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             displayName: dpName,
             email: user.email,
+            createdAt: createdAt,
           })
           updateProfile(auth.currentUser, {
-            displayName: dpName
+            displayName: dpName,
+
           })
           dispatch(userActions.setCurrentUser(user))
           console.log(user)
@@ -125,39 +128,11 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          // ..
+
         });
     }
   }
-  /*  const submitHandler = async (event) => {
-     event.preventDefault();
-     if (isLoginMode) {
-       try {
-         await signInWithEmailAndPassword(auth,
-           formState.inputs.email.value,
-           formState.inputs.password.value
-         );
-       } catch (error) {
-         console.log(error);
-       }
-     } else {
-       try {
-         const { user } = await createUserWithEmailAndPassword(auth,
-           formState.inputs.email.value,
-           formState.inputs.password.value
-         );
-         console.log(user)
-         await createUserProfileDocument(user, {
-           displayName: formState.inputs.displayName.value,
-         })
- 
-       } catch (error) {
-         console.log(error);
-       }
-     }
-   }; */
-  const userA = auth.currentUser;
-  console.log(userA)
+
   return (
     <LayoutPage>
       <Wrapper>
