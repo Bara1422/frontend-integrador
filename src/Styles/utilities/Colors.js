@@ -21,4 +21,4 @@ export const theme = {
   bgPending: 'rgba(255,213,89)',
   canceled: 'white',
   bgCanceled: 'rgba(255,68,31)',
-}
+};

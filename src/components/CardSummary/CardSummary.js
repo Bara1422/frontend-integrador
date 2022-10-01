@@ -1,9 +1,6 @@
-import { CustomButton } from '../UI'
-import { CardContainer, CardSummaryContent, LiCard, RowCard, TotalCard, UlCard } from './CardSummaryElements'
-import { formatPrice } from '../../utils/formatPrice'
-import { useSelector, useDispatch } from 'react-redux'
-import { COSTO_ENVIO } from '../../utils/ShippingCost'
-import { style } from '@mui/system'
+import { CustomButton } from '../UI';
+import { CardContainer, CardSummaryContent, LiCard, RowCard, TotalCard, UlCard } from './CardSummaryElements';
+import { formatPrice } from '../../utils/formatPrice';
 
 export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
 
@@ -31,5 +28,5 @@ export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
         </CustomButton>
       </CardSummaryContent>
     </CardContainer>
-  )
-}
+  );
+};

@@ -1,9 +1,9 @@
-import { SET_CURRENT_USER, TOGGLE_MENU_HIDDEN } from './user-actions'
+import { SET_CURRENT_USER, TOGGLE_MENU_HIDDEN } from './user-actions';
 
 const INITIAL_STATE = {
   currentUser: null,
   hiddenMenu: true,
-}
+};
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -16,11 +16,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case TOGGLE_MENU_HIDDEN:
       return {
         ...state,
-        hiddenMenu: !state.hiddenMenu
-      }
+        hiddenMenu: !state.hiddenMenu,
+      };
     default:
       return state;
   }
 };
 
-export default userReducer
+export default userReducer;

@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, addDoc, getDocs, setDoc, collection, query, where, orderBy } from "firebase/firestore";
-import { get } from "react-scroll/modules/mixins/scroller";
+import { getAuth } from "firebase/auth";
+import { getFirestore, getDocs, collection, query, where, orderBy } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -14,39 +13,25 @@ const firebaseConfig = {
 };
 
 export const getOrders = async (userId) => {
-  console.log(userId)
+
   const orderRef = query(collection(db, 'orders'), where('userId', '==', userId), orderBy('createdAt', 'desc'));
-  console.log(orderRef)
+  let orders = await getDocs(orderRef)
+    .then((querySnapshot) => {
+      let orders = [];
+      querySnapshot.forEach((doc) => {
+        orders = [...orders, { id: doc.id, ...doc.data() }];
+      }
+      );
+      return orders;
+    }).catch((error) => {
+      console.log('error', error);
+    });
 
- /*  let querySnapshot = await getDocs(orderRef);
-  querySnapshot.forEach((doc) => {
-    querySnapshot = [...querySnapshot, { id: doc.id, ...doc.data() }]
-    console.log(doc.id, '>>>', doc.data())
-  })
-
-  return querySnapshot
-} */
-let orders = await getDocs(orderRef)
-  .then((querySnapshot) => {
-    let orders = [];
-    querySnapshot.forEach((doc) => {
-      orders = [...orders, { id: doc.id, ...doc.data() }]
-      console.log(doc.uid)
-      console.log(doc.data())
-      console.log(orders)
-    }
-    );
-    return orders;
-
-  }).catch((error) => {
-    console.log('error', error)
-  })
-console.log(orders)
-return orders
-}
+  return orders;
+};
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-export default app
+export default app;

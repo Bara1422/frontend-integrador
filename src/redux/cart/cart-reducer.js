@@ -1,10 +1,11 @@
 import { ADD_ITEM, TOGGLE_CART_HIDDEN, REMOVE_ITEM, CLEAR_CART, CART_HIDDEN } from "./cart-actions";
 import { addItemToCart, removeItemsToCart } from "./cart-utils";
 
+
 const INITIAL_STATE = {
   hidden: false,
   cartItems: [],
-}
+};
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -38,4 +39,4 @@ const cartReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default cartReducer
+export default cartReducer;

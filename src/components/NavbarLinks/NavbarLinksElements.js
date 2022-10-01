@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { below, above } from "../../Styles/utilities";
+import { below } from "../../Styles/utilities";
 
 export const NavbarStyled = styled.div`
   padding: 10px;

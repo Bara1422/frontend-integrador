@@ -13,6 +13,9 @@ export const UserMenuStyled = styled.div`
   border: 1px solid #c7c7c7;
   visibility: visible;
   min-width: 250px;
+  transform: ${({ show }) => show ? 'translateX(0%)' : 'translateX(100%)'};
+  transition-property: transform;
+  transition-duration: 0.5s;
   border-radius: 8px;
   background: #ffffff;
 `;

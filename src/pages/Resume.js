@@ -6,7 +6,7 @@ const Resume = () => {
     <CheckoutContainerStyled>
       <OrderResume />
     </CheckoutContainerStyled>
-  )
-}
+  );
+};
 
-export default Resume
+export default Resume;

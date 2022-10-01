@@ -1,13 +1,13 @@
-import React from 'react'
-import { Banner } from '../components/Banner/Banner'
-import { Navbar } from '../components/Navbar/Navbar'
-import { NavbarLinks } from '../components/NavbarLinks/NavbarLinks'
-import { AboutAs } from '../components/AboutAs/AboutAs'
-import Contact from '../components/Contact/Contact'
-import { Link as LinkScroll } from 'react-scroll'
-import Footer from '../components/Footer/Footer'
+import React from 'react';
+import { Banner } from '../components/Banner/Banner';
+import { Navbar } from '../components/Navbar/Navbar';
+import { NavbarLinks } from '../components/NavbarLinks/NavbarLinks';
+import { AboutAs } from '../components/AboutAs/AboutAs';
+import Contact from '../components/Contact/Contact';
+import Footer from '../components/Footer/Footer';
+
+
 const Home = () => {
-  
 
   return (
     <>
@@ -21,7 +21,7 @@ const Home = () => {
       <Contact />
       <Footer />
     </>
-  )
-}
+  );
+};
 
 export default Home;

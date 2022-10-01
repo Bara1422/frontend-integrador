@@ -41,7 +41,7 @@ padding: 7px;
 &::placeholder {
   color: #ccc;
 }
-`
+`;
 
 export const FormTitle = styled.p`
   color: black;

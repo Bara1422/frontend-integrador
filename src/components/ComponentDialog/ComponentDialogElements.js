@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Title } from "../UI/Title";
 import { ComponentLabel } from '../Menu/MenuElements';
 

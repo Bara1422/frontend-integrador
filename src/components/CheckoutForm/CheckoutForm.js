@@ -1,26 +1,25 @@
-import { FormSectionStyled, FormTitle, InputCheckoutStyled } from "./CheckoutFormElements";
-import useForm from '../../hooks/useForm'
-import { FormStyled, FormContent, CustomButton, Input, Spinner } from '../UI'
-import { InputStyled } from "../Contact/ContactElements";
-import { CardSummary } from '../CardSummary/CardSummary'
-import { VALIDATOR_REQUIRE } from '../../utils/validators'
+import { FormSectionStyled } from "./CheckoutFormElements";
+import useForm from '../../hooks/useForm';
+import { FormStyled, Input, Spinner } from '../UI';
+import { CardSummary } from '../CardSummary/CardSummary';
+import { VALIDATOR_REQUIRE } from '../../utils/validators';
 import { COSTO_ENVIO } from "../../utils/ShippingCost";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import * as orderActions from '../../redux/orders/order-actions'
-import * as cartActions from '../../redux/cart/cart-actions'
-import { useEffect } from "react";
 
+import * as orderActions from '../../redux/orders/order-actions';
+import * as cartActions from '../../redux/cart/cart-actions';
 
 export const CheckoutForm = () => {
-  const currentUser = useSelector(state => state.user.currentUser)
-  const { cartItems } = useSelector(state => state.cart)
-  const { purchased, loading } = useSelector(state => state.orders)
+  const currentUser = useSelector(state => state.user.currentUser);
+  const { cartItems } = useSelector(state => state.cart);
+  const { purchased, loading } = useSelector(state => state.orders);
   const subTotal = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity;
-  }, 0)
+  }, 0);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const [formState, inputHandler] = useForm(
     {
       domicilio: {
@@ -37,10 +36,10 @@ export const CheckoutForm = () => {
 
 
   const handlerSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!formState.isValid) {
-      console.log('Completar todos los datos')
-      return
+      console.log('Completar todos los datos');
+      return;
     }
     const orderData = {
       userId: currentUser.uid,
@@ -52,15 +51,17 @@ export const CheckoutForm = () => {
       shippingPrice: COSTO_ENVIO,
       subTotal: subTotal,
       total: COSTO_ENVIO + subTotal,
-      status: 'pending'
+      status: 'pending',
+
     };
-    console.log(orderData)
+
     dispatch(orderActions.createOrder(orderData));
     dispatch(cartActions.clearCart());
-  }
+
+  };
   if (purchased) {
-    dispatch(orderActions.purchaseInit())
-    navigate('/mis-ordenes')
+    dispatch(orderActions.purchaseInit());
+    navigate('/mis-ordenes');
   }
 
   return (
@@ -85,8 +86,9 @@ export const CheckoutForm = () => {
       </FormSectionStyled>
 
       <CardSummary isValid={!formState.isValid} subTotal={subTotal} envio={COSTO_ENVIO} handlerSubmit={handlerSubmit} />
-      {loading && <Spinner />}
+      {
+        loading && <Spinner />}
     </FormStyled>
 
-  )
-}
+  );
+};

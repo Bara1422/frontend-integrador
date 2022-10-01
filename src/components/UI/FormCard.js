@@ -18,4 +18,4 @@ export const FormContent = styled.div`
   padding: 24px 32px 15px;
   border-radius: 15px 15px;
   background-color: #fff;
-`
+`;

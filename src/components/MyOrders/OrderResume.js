@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { formatPrice } from '../../utils/formatPrice';
 import { CustomButton } from '../UI';
+import { v4 as uuidv4 } from 'uuid';
 import {
   HeaderResume,
   ProductResume,
@@ -22,11 +23,11 @@ import {
 } from './OrderResumeElements';
 
 export const OrderResume = () => {
-  let { orderId } = useParams()
-  let { orders } = useSelector(state => state.orders)
-  
+  let { orderId } = useParams();
+  let { orders } = useSelector(state => state.orders);
 
-  let [order] = orders.filter(order => (order.id === orderId))
+
+  let [order] = orders.filter(order => (order.id === orderId));
   return (
     <Container>
       <OrderHistory>
@@ -47,7 +48,7 @@ export const OrderResume = () => {
           <h3>Productos</h3>
           <ProductUl>
             {order.items.map(item => (
-              <ProductLi>
+              <ProductLi key={uuidv4()}>
                 <ItemImg img={item.img} />
                 <InfoProducts>
                   <p>{item.name}</p>

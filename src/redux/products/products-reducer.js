@@ -1,8 +1,8 @@
-import { Components } from '../../data/data'
+import { Components } from '../../data/data';
 
 const INITIAL_STATE = {
   components: Components
-}
+};
 
 const productsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -11,4 +11,4 @@ const productsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default productsReducer
+export default productsReducer;

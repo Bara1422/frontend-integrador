@@ -1,1 +1,1 @@
-export const COSTO_ENVIO = 250
+export const COSTO_ENVIO = 250;

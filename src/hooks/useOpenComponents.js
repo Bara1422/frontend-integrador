@@ -5,5 +5,5 @@ export const useOpenComponents = () => {
   return {
     openComponents,
     setOpenComponents
-  }
-}
+  };
+};

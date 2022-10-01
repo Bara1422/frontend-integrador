@@ -7,30 +7,30 @@ import { Order } from './components/Orders/Order';
 import { Products } from './pages/Products';
 import Checkout from './pages/Checkout';
 import Home from './pages/Home';
-import Orders from './pages/Orders'
+import Orders from './pages/Orders';
 import Resume from './pages/Resume';
-import Login from './pages/Login'
-import { useSelector, useDispatch } from 'react-redux'
-import { auth, createUserProfileDocument, db } from './firebase/firebase.utils2'
-import * as userActions from './redux/user/user-actions'
+import Login from './pages/Login';
+import { useSelector, useDispatch } from 'react-redux';
+import { auth } from './firebase/firebase.utils2';
+import * as userActions from './redux/user/user-actions';
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, doc, getDoc, onSnapshot } from 'firebase/firestore'
+
 
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
       if (currentUser) {
-        dispatch(userActions.setCurrentUser(currentUser))
+        dispatch(userActions.setCurrentUser(currentUser));
       } else {
-        dispatch(userActions.setCurrentUser(null))
+        dispatch(userActions.setCurrentUser(null));
       }
-    })
-  }, [dispatch])
+    });
+  }, [dispatch]);
 
   return (
     <Router>

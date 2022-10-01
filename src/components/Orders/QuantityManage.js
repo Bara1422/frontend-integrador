@@ -1,9 +1,8 @@
 import React from 'react';
-import DeleteIcon from '@mui/icons-material/Delete'
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Title } from '../UI/Title';
 import styled from 'styled-components';
 
-import { formatPrice } from '../../data/data';
 import RemoveIcon from '../../assets/img/delete-full.svg';
 import * as cartActions from '../../redux/cart/cart-actions';
 import { useDispatch } from 'react-redux';

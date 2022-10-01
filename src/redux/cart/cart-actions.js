@@ -6,7 +6,7 @@ export const CART_HIDDEN = 'CART_HIDDEN';
 
 export const cartHidden = () => ({
   type: CART_HIDDEN,
-})
+});
 
 export const toggleCartHidden = () => ({
   type: TOGGLE_CART_HIDDEN,

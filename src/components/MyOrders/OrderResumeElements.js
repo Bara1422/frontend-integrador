@@ -15,8 +15,7 @@ export const Container = styled.div`
 
 export const OrderHistory = styled.div`
   width: 100%;
-  /* En dark mode sería así background-color: #0000003d; */
-  /* En dark mode seria así color: white; */
+
   background-color: #fafafa;
   color: black;
   border-radius: 20px;

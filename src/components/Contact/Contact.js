@@ -1,22 +1,26 @@
-import React from 'react'
-import { FormContainerStyled, FormStyled, FormTitleStyled, InputStyled, TextAreaStyled, SubmitStyled } from './ContactElements'
-import { useForm } from 'react-hook-form'
-
+import React, { useEffect } from 'react';
+import { FormContainerStyled, FormStyled, FormTitleStyled, InputStyled, TextAreaStyled, SubmitStyled } from './ContactElements';
+import { useForm, } from 'react-hook-form';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Contact = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
 
   const customSubmit = (data, e) => {
-    alert(`${data.nombre}, nos contactaremos a la brevedad.`)
-  }
+    alert(`${data.nombre}, nos contactaremos a la brevedad.`);
+  };
   const onError = (errors, e) => {
-    console.log(errors, e)
-  }
+    console.log(errors, e);
+  };
+  useEffect(() => {
+    AOS.init({ duration: 2000 });
+  }, []);
 
   return (
-    <FormContainerStyled>
-      <FormStyled onSubmit={handleSubmit(customSubmit, onError)}>
+    <FormContainerStyled >
+      <FormStyled onSubmit={handleSubmit(customSubmit, onError)} data-aos='fade-up'>
         <FormTitleStyled id='contact'>Contactanos</FormTitleStyled>
         <InputStyled
           placeholder='Nombre'
@@ -40,10 +44,16 @@ const Contact = () => {
         />
         {errors.mensaje?.type === 'required' && <small style={{ color: 'red', paddingBottom: "10px", paddingLeft: '5px' }}>El campo no puede estar vacio</small>}
         {errors.mensaje?.type === 'maxLength' && <small style={{ color: 'red', paddingBottom: "10px", paddingLeft: '5px' }}>El campo no puede contener mas de 200 caracteres</small>}
-        <SubmitStyled type='submit'>Enviar</SubmitStyled>
+        <SubmitStyled
+          type='submit'
+          onClick={() => {
+            const getValuess = JSON.stringify(getValues(['nombre', 'email', 'mensaje']));
+            console.log(getValuess);
+          }}
+        >Enviar</SubmitStyled>
       </FormStyled>
     </FormContainerStyled>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

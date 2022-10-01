@@ -4,8 +4,7 @@ import { status } from '../../Styles/utilities';
 export const Container = styled.div`
   width: 70%;
   min-height: 100vh;
-  z-index: 10;
- 
+  z-index: 0;
   @media screen and (max-width: 600px) {
     width: 100%;
     margin-top: 100px;
@@ -56,7 +55,7 @@ export const OrderDetails = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1100px) {
     flex-wrap: wrap;
   }
 `;
@@ -88,6 +87,7 @@ export const OrderLi = styled.p`
   width: 100%;
   display: inline-block;
   vertical-align: top;
+  
   zoom: 1;
   line-height: 1.7;
   text-overflow: ellipsis;

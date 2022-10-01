@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css } from 'styled-components';
 
 const size = {
   xlarge: 1120,
@@ -23,4 +23,4 @@ export const below = Object.keys(size).reduce((acc, label) => {
     }
   `;
   return acc;
-}, {})
+}, {});

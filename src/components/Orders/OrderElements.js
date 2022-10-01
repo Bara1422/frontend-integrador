@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DialogContent } from '../ComponentDialog/ComponentDialogElements'
+import { DialogContent } from '../ComponentDialog/ComponentDialogElements';
 
 export const OrderStyled = styled.div`
   position: fixed;

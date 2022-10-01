@@ -1,26 +1,26 @@
-import { useEffect } from "react"
-import { useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { MyOrders } from "../components/MyOrders/MyOrders"
-import { LayoutPage, Wrapper } from "../components/UI"
 
-import * as orderActions from '../redux/orders/order-actions'
+import { useEffect } from "react";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { MyOrders } from "../components/MyOrders/MyOrders";
+import { LayoutPage, Wrapper } from "../components/UI";
+
+import * as orderActions from '../redux/orders/order-actions';
 
 
 
 const Orders = () => {
-  const currentUser = useSelector(state => state.user.currentUser)
-  let { orders, error } = useSelector(state => state.orders)
-  const dispatch = useDispatch()
-
+  const currentUser = useSelector(state => state.user.currentUser);
+  let { orders, error } = useSelector(state => state.orders);
+  const dispatch = useDispatch();
 
   const fetchOrders = useCallback(async () => {
-    dispatch(orderActions.fetchOrders(currentUser.uid))
-  }, [dispatch, currentUser])
+    dispatch(orderActions.fetchOrders(currentUser.uid));
+  }, [dispatch, currentUser]);
 
   useEffect(() => {
     fetchOrders();
-  }, [fetchOrders])
+  }, [fetchOrders]);
 
   return (
     <LayoutPage>
@@ -28,7 +28,7 @@ const Orders = () => {
         <MyOrders orders={orders} />
       </Wrapper>
     </LayoutPage>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;

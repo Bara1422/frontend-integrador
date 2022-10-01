@@ -1,16 +1,16 @@
-import { v4 as uuidv4 } from 'uuid'
-import { setDoc, doc, onSnapshot, addDoc, collection, getDocs, query } from 'firebase/firestore';
+
+import { onSnapshot, addDoc, collection } from 'firebase/firestore';
 import { db, getOrders } from '../../firebase/firebase.utils2';
-import { createOrderDocument } from '../../firebase/firebase.utils2';
 
 
 export const START_ORDER = 'CREATE_ORDER';
-export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS'
-export const CREATE_ORDER_FAIL = 'CREATE_ORDER_FAIL'
-export const PURCHASE_INIT = 'PURCHASE_INIT'
-export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS'
-export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL'
-export const FETCH_ORDERS_START = 'FETCH_ORDERS_START'
+export const DELETE_ORDER = 'DELETE_ORDER';
+export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
+export const CREATE_ORDER_FAIL = 'CREATE_ORDER_FAIL';
+export const PURCHASE_INIT = 'PURCHASE_INIT';
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
+export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
+export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
 
 export const createOrderSuccess = (orderData) => {
   return {
@@ -32,18 +32,18 @@ export const createOrderStart = () => {
   };
 };
 
+
 export const createOrder = (orderData) => {
   return async (dispatch) => {
     dispatch(createOrderStart());
+
     try {
-      const createdAt = new Date()
+      const createdAt = new Date();
       const orderRef = await addDoc(collection(db, 'orders'), {
-        id: uuidv4(),
         createdAt: createdAt,
         ...orderData,
-      })
-
-      onSnapshot(orderRef, (snapShot) => {
+      });
+      onSnapshot(orderRef, async (snapShot) => {
         dispatch(createOrderSuccess({ id: snapShot.id, ...snapShot.data() }));
       });
     } catch (error) {
@@ -54,7 +54,7 @@ export const createOrder = (orderData) => {
 
 export const purchaseInit = () => ({
   type: PURCHASE_INIT,
-})
+});
 
 export const fetchOrderSuccess = (orders) => {
   return {
@@ -81,9 +81,9 @@ export const fetchOrders = (userId) => {
     dispatch(fetchOrderStart());
     try {
       const fetchedOrders = await getOrders(userId);
-      dispatch(fetchOrderSuccess(fetchedOrders))
+      dispatch(fetchOrderSuccess(fetchedOrders));
     } catch (error) {
-      dispatch(fetchOrderFail(error))
+      dispatch(fetchOrderFail(error));
     }
-  }
-}
+  };
+};

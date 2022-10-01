@@ -1,8 +1,8 @@
-import { arraySections } from '../../data/data'
+import { arraySections } from '../../data/data';
 
 const INITIAL_STATE = {
   categories: arraySections
-}
+};
 
 const categoriesReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -11,4 +11,4 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default categoriesReducer
+export default categoriesReducer;

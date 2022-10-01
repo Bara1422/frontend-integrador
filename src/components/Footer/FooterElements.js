@@ -41,7 +41,7 @@ export const FooterMenuStyled = styled.div`
     text-decoration: none
     }
   }
-`
+`;
 export const CopyrightStyled = styled.section`
   color: #ddd;
   width: 100%;

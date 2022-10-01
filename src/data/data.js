@@ -65,7 +65,7 @@ export const Components = componentItem.reduce((res, comp) => {
   if (!res[comp.section]) {
     res[comp.section] = [];
   }
-  res[comp.section] = [...res[comp.section], comp]
+  res[comp.section] = [...res[comp.section], comp];
 
-  return res
-}, {})
+  return res;
+}, {});

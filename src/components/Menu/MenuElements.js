@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { below } from "../../Styles/utilities";
-import { Title } from '../UI/Title'
+import { Title } from '../UI/Title';
 
 export const ComponentGrid = styled.div`
   display: grid;
@@ -69,14 +69,14 @@ export const ComponentsStyled = styled.div`
   ${below.small`
     margin: 0;
   `}
-`
+`;
 
 export const ComponentCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   
-`
+`;
 export const AddToCardButton = styled.div`
   margin: 10px;
   color: white;

@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { below } from '../../Styles/utilities';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 export const NavbarStyled = styled.div`
   padding: 20px;
@@ -43,7 +43,7 @@ export const Divider = styled.div`
   border-left: 1px solid #dfdddd;
   margin: 0 25px;
   height: 25px;
-`
+`;
 export const LoginButton = styled.button`
   cursor: pointer;
   color: #fff;
@@ -60,7 +60,7 @@ export const LoginButton = styled.button`
     color: #BC02CB;
     border: 1px solid #fff
   }
-`
+`;
 
 export const NavigationMenu = styled.div`
   display: flex;
@@ -75,7 +75,7 @@ export const NavigationMenu = styled.div`
   ${below.small`
     padding-top: 1.5rem;
   `}
-`
+`;
 
 export const LinkStyled = styled(Link)`
   max-height: 100%;

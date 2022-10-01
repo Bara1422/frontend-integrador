@@ -1,7 +1,7 @@
-import React from 'react'
-import { LinkStyled } from '../Navbar/NavbarElements'
-import { FooterMenuStyled } from './FooterElements'
-import { Link as LinkScroll } from 'react-scroll'
+import React from 'react';
+import { LinkStyled } from '../Navbar/NavbarElements';
+import { FooterMenuStyled } from './FooterElements';
+import { Link as LinkScroll } from 'react-scroll';
 
 const FooterMenu = () => {
   return (
@@ -35,7 +35,7 @@ const FooterMenu = () => {
         </li>
       </ul>
     </FooterMenuStyled>
-  )
-}
+  );
+};
 
-export default FooterMenu
+export default FooterMenu;

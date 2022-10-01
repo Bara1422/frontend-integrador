@@ -25,4 +25,4 @@ export const AboutAsStyled = styled.div`
 
 export const LinkAsStyled = styled(Link)`
   color: #BC02CB;
-`
+`;

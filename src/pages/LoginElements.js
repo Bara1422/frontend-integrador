@@ -12,7 +12,7 @@ export const GoogleButton = styled(CustomButton)`
   display: flex;
   justify-content: space-around;
   background-color: #ff4d94;
-`
+`;
 
 export const ALink = styled.a`
   color: red;

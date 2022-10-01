@@ -1,24 +1,24 @@
 import { useState } from "react";
 import useForm from "../hooks/useForm";
-import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../utils/validators'
-import { Wrapper, LayoutPage, FormStyled, FormContent, Input, CustomButton } from '../components/UI'
+import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../utils/validators';
+import { Wrapper, LayoutPage, FormStyled, FormContent, Input, CustomButton } from '../components/UI';
 import { Containerbuttons, GoogleButton, ALink } from "./LoginElements";
 import GoogleIcon from '@mui/icons-material/Google';
 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { auth, db, createUserProfileDocument } from '../firebase/firebase.utils2'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile, setPersistence, inMemoryPersistence } from "firebase/auth";
+import { auth, db } from '../firebase/firebase.utils2';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import * as userActions from '../redux/user/user-actions'
+import * as userActions from '../redux/user/user-actions';
 
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
-  const currentUser = useSelector(state => state.user.currentUser)
-  const [isLoginMode, setIsLoginMode] = useState(true)
+  const currentUser = useSelector(state => state.user.currentUser);
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
@@ -34,27 +34,27 @@ const Login = () => {
   );
 
   if (currentUser) {
-    navigate(-1)
+    navigate(-1);
   }
 
   const signInWithGoogle = async (e) => {
     await signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        const createdAt = new Date()
+        const createdAt = new Date();
         const docRef = setDoc(doc(db, 'users', user.uid), {
           displayName: user.displayName,
           email: user.email,
           uid: user.uid,
           createdAt: createdAt,
-        })
-        console.log(user)
-        dispatch(userActions.setCurrentUser(user))
+        });
+        console.log(user);
+        dispatch(userActions.setCurrentUser(user));
       }).catch((error) => {
-        console.log(error)
-      })
+        console.log(error);
+      });
 
-  }
+  };
 
   const switchModeHandler = () => {
     if (!isLoginMode) {
@@ -83,7 +83,7 @@ const Login = () => {
         false
       );
     }
-    setIsLoginMode((prevMode) => !prevMode)
+    setIsLoginMode((prevMode) => !prevMode);
   };
 
   const submitHandler = (e) => {
@@ -96,9 +96,9 @@ const Login = () => {
             uid: user.uid,
             displayName: user.displayName,
             email: user.email,
-          })
-          dispatch(userActions.setCurrentUser(user))
-          console.log(user)
+          });
+          dispatch(userActions.setCurrentUser(user));
+          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -108,21 +108,21 @@ const Login = () => {
       createUserWithEmailAndPassword(auth, formState.inputs.email.value, formState.inputs.password.value)
         .then((userCredential) => {
           const user = userCredential.user;
-          const dpName = formState.inputs.nombre.value
-          const createdAt = new Date()
+          const dpName = formState.inputs.nombre.value;
+          const createdAt = new Date();
           setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             displayName: dpName,
             email: user.email,
             createdAt: createdAt,
-          })
+          });
           updateProfile(auth.currentUser, {
             displayName: dpName,
 
-          })
-          dispatch(userActions.setCurrentUser(user))
-          console.log(user)
-          console.log(dpName)
+          });
+          dispatch(userActions.setCurrentUser(user));
+          console.log(user);
+          console.log(dpName);
 
         })
         .catch((error) => {
@@ -131,7 +131,7 @@ const Login = () => {
 
         });
     }
-  }
+  };
 
   return (
     <LayoutPage>
@@ -184,7 +184,7 @@ const Login = () => {
         </form>
       </Wrapper>
     </LayoutPage>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

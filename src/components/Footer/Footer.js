@@ -1,6 +1,6 @@
-import React from 'react'
-import { FooterContainerStyled, FooterLogoStyled, FooterMenuStyled, CopyrightStyled } from './FooterElements'
-import FooterMenu from './FooterMenu'
+import React from 'react';
+import { FooterContainerStyled, CopyrightStyled } from './FooterElements';
+import FooterMenu from './FooterMenu';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
@@ -18,7 +18,7 @@ const Footer = () => {
       </CopyrightStyled>
       <FooterMenu />
     </FooterContainerStyled >
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

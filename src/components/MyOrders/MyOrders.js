@@ -1,9 +1,7 @@
-import { collection } from 'firebase/firestore';
-import { useSelector } from 'react-redux';
-import { Route, Routers, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { formatPrice, formatDate } from '../../utils/formatPrice';
 import { CustomButton } from '../UI';
-import { db } from '../../firebase/firebase.utils2';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Container,
   OrderHistory,
@@ -21,7 +19,7 @@ import {
 
 
 export const MyOrders = ({ orders }) => {
-  const currentUser = useSelector(state => state.user.currentUser)
+
 
   return (
     <Container>
@@ -34,24 +32,22 @@ export const MyOrders = ({ orders }) => {
             </p>
           </OrderTitle>
           <div>
-            {console.log(currentUser)}
+
             {orders.map(order => (
-              <OrderContent>
+              <OrderContent key={uuidv4()}>
                 <OrderDetails>
-                  <OrderUl>
-                    <OrderLi key={order}>
+                  <OrderUl >
+                    <OrderLi >
                       <OrderSpan>Fecha:</OrderSpan>
                       {formatDate(new Date(order.createdAt.seconds))}
                     </OrderLi>
                     <OrderLi>
                       <OrderSpan>Total:</OrderSpan>
                       {formatPrice(order.total)}
-
-                    </OrderLi>
+                    </OrderLi >
                   </OrderUl>
                   <StatusContainerStyled>
                     <Status type={order.status}>{order.status}</Status>
-
                   </StatusContainerStyled>
                   <Flex>
                     <Link to={`${order.id}`}>
@@ -67,5 +63,5 @@ export const MyOrders = ({ orders }) => {
         </Wrapper>
       </OrderHistory>
     </Container>
-  )
-}
+  );
+};

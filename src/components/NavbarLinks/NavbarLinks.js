@@ -1,13 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { NavbarStyled } from './NavbarLinksElements'
-import { Link as LinkScroll } from 'react-scroll'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { NavbarStyled } from './NavbarLinksElements';
+import { Link as LinkScroll } from 'react-scroll';
 
 
 export const NavbarLinks = () => {
   return (
     <div>
-      <NavbarStyled>
+      <NavbarStyled id='about'>
         <ul>
           <li>
             <LinkScroll
@@ -36,5 +36,5 @@ export const NavbarLinks = () => {
 
       </NavbarStyled>
     </div >
-  )
-}
+  );
+};

@@ -12,7 +12,7 @@ export const FormContainerStyled = styled.div`
   ${below.large`
     background-position: left;
   `}
-`
+`;
 export const FormStyled = styled.form`
   display: flex;
   background-color: #000;
@@ -26,7 +26,7 @@ export const FormStyled = styled.form`
   ${below.med`
     width: 100%
   `}
-`
+`;
 export const FormTitleStyled = styled.h2`
   text-align: center;
   color: #fff;
@@ -34,7 +34,7 @@ export const FormTitleStyled = styled.h2`
   ${below.large`
     font-size: 1.2rem;
   `}
-`
+`;
 export const InputStyled = styled.input`
   margin-bottom: 0.5rem;
   border-radius: 5px;
@@ -47,7 +47,7 @@ export const InputStyled = styled.input`
   &::placeholder {
     color: #ccc;
   }
-`
+`;
 
 export const TextAreaStyled = styled.textarea`
    margin-bottom: 0.5rem;
@@ -62,7 +62,7 @@ export const TextAreaStyled = styled.textarea`
     color: #ccc;
   }
   font-family: 'Roboto', sans-serif;
-`
+`;
 
 export const SubmitStyled = styled.button`
  border: 2px #fff solid;
@@ -82,4 +82,4 @@ export const SubmitStyled = styled.button`
   &:hover {
     color: #BC02CB;
   };
-`
+`;

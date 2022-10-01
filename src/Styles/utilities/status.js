@@ -1,5 +1,5 @@
-import { theme } from './Colors'
-import { css } from 'styled-components'
+import { theme } from './Colors';
+import { css } from 'styled-components';
 
 export const status = (type) => {
   switch (type) {
@@ -22,6 +22,6 @@ export const status = (type) => {
       return css`
         color: ${theme.pending};
         background-color: ${theme.bgPending};
-      `
+      `;
   }
-}
+};
