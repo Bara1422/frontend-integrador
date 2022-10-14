@@ -10,7 +10,7 @@ import * as userActions from '../../redux/user/user-actions';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export const Navbar = () => {
+export const Navbar = ({ shake }) => {
   const currentUser = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch();
 
@@ -33,11 +33,11 @@ export const Navbar = () => {
         <h2>Todo-Gaming</h2>
       </LinkStyled>
       <NavigationMenu>
-        <CartIcon />
+        <CartIcon shake={shake} />
         <Divider />
         {currentUser ? (
           <>
-            <AccountCircleIcon fontSize='large' style={{ cursor: 'pointer' }} onClick={handleToggle} data-aos='fade-left' />
+            <AccountCircleIcon fontSize='large' style={{ cursor: 'pointer'}} onClick={handleToggle} data-aos='fade-left' />
             <UserMenu user={currentUser} />
           </>
         ) : (

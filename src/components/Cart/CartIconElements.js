@@ -1,5 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+
+export const CartIconShake = keyframes`
+  10% {transform: scale(1.05) rotate(5deg);}
+  20% {transform: scale(1.05) rotate(-5deg);}
+  30% {transform: scale(1.05) rotate(5deg);}
+  40% {transform: none;}
+`;
 
 export const CartIconContainer = styled.div`
   display: flex;
@@ -8,11 +15,17 @@ export const CartIconContainer = styled.div`
   justify-content: center;
   cursor: pointer;
   position: relative;
+  ${({ shake }) =>
+    shake &&
+    css`
+    animation: ${CartIconShake} 1s infinite ease;
+    `}
 `;
 
 export const CartIconStyled = styled(ShoppingBagIcon)`
   width: 45px;
   height: 45px;
+ 
   
 `;
 

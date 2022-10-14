@@ -14,7 +14,7 @@ import * as cartActions from '../../redux/cart/cart-actions';
 import toast, { Toaster } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 
-export const Menu = () => {
+export const Menu = ({ onProductAdd }) => {
   const dispatch = useDispatch();
   const [section, setSection] = useState(null);
   let Components = useSelector(state => state.products.components);
@@ -36,6 +36,7 @@ export const Menu = () => {
         },
       }
     );
+    onProductAdd();
   };
 
   return (

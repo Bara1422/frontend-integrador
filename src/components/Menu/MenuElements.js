@@ -92,6 +92,7 @@ export const AddToCardButton = styled.div`
   }
   &:active {
     opacity: 1;
+    
   }
 `;
 
