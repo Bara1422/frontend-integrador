@@ -3,17 +3,17 @@ import { css } from 'styled-components';
 
 export const status = (type) => {
   switch (type) {
-    case 'success':
+    case 'Realizado':
       return css`
         color:  ${theme.success};
         background-color: ${theme.bgSuccess};
       `;
-    case 'pending':
+    case 'Pendiente':
       return css`
         color: ${theme.pending};
         background-color: ${theme.bgPending};
       `;
-    case 'cancelled':
+    case 'Cancelado':
       return css`
         color: ${theme.canceled};
         background-color: ${theme.bgCanceled};

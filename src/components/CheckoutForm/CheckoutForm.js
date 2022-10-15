@@ -51,7 +51,7 @@ export const CheckoutForm = () => {
       shippingPrice: COSTO_ENVIO,
       subTotal: subTotal,
       total: COSTO_ENVIO + subTotal,
-      status: 'pending',
+      status: 'Pendiente',
 
     };
 

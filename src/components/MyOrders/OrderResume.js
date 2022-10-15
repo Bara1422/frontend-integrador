@@ -55,7 +55,7 @@ export const OrderResume = () => {
                 </InfoProducts>
                 <PriceResume>
                   <Quantity>x{item.quantity}</Quantity>
-                  <strong>${item.price}</strong>
+                  <strong>{formatPrice(item.price)}</strong>
                 </PriceResume>
               </ProductLi>
             ))}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatPrice } from '../../utils/formatPrice';
-import { OrderContent, OrderStyled, OrderContainer, OrderItem, ItemImg } from './OrderElements';
+import { OrderContent, OrderStyled, OrderContainer, OrderItem, ItemImg, ClearCartButton } from './OrderElements';
 import { DialogFooter, ConfirmButton, DialogShadow } from '../ComponentDialog/ComponentDialogElements';
 import { useSelector, useDispatch } from 'react-redux';
 import { QuantityManage } from './QuantityManage';
@@ -16,6 +16,10 @@ export const Order = () => {
   }, 0);
   const dispatch = useDispatch();
 
+  const handleClearCart = () => {
+    dispatch(cartActions.clearCart());
+  };
+
   const handleToggle = () => {
     dispatch(cartActions.toggleCartHidden());
   };
@@ -26,7 +30,10 @@ export const Order = () => {
       <OrderStyled show={hidden}>
 
         <OrderContent>
-          <OrderContainer>Tu pedido:</OrderContainer>
+          <OrderContainer>
+            Tu pedido:
+            <ClearCartButton onClick={handleClearCart}>Vaciar carrito</ClearCartButton>
+          </OrderContainer>
           {cartItems.map(item => (
             <OrderContainer key={item.id}>
               <OrderItem>

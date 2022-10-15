@@ -45,7 +45,7 @@ export const StatusContainerStyled = styled.div`
 
 export const Status = styled.div`
   padding: 8px 18px;
-  border-radius: 0 8px;
+  border-radius: 10px;
   font-family: Poppins-SemiBold, Helvetica, Arial, sans-serif;
   text-align: center;
   ${({ type }) => status(type)}
