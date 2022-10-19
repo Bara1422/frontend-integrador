@@ -3,7 +3,6 @@ import useForm from '../../hooks/useForm';
 import { FormStyled, Input, Spinner } from '../UI';
 import { CardSummary } from '../CardSummary/CardSummary';
 import { VALIDATOR_REQUIRE } from '../../utils/validators';
-import { COSTO_ENVIO } from "../../utils/ShippingCost";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +18,7 @@ export const CheckoutForm = () => {
   }, 0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let COSTOENVIO = 250;
 
   const [formState, inputHandler] = useForm(
     {
@@ -37,7 +37,7 @@ export const CheckoutForm = () => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    if (!formState.isValid) {
+    if (!formState.isValid || subTotal === 0) {
       console.log('Completar todos los datos');
       return;
     }
@@ -48,15 +48,16 @@ export const CheckoutForm = () => {
         localidad: formState.inputs.localidad.value,
       },
       items: [...cartItems],
-      shippingPrice: COSTO_ENVIO,
+      shippingPrice: COSTOENVIO,
       subTotal: subTotal,
-      total: COSTO_ENVIO + subTotal,
+      total: COSTOENVIO + subTotal,
       status: 'Pendiente',
-
     };
 
     dispatch(orderActions.createOrder(orderData));
     dispatch(cartActions.clearCart());
+    COSTOENVIO = 0;
+    console.log(COSTOENVIO);
 
   };
   if (purchased) {
@@ -85,7 +86,7 @@ export const CheckoutForm = () => {
         />
       </FormSectionStyled>
 
-      <CardSummary isValid={!formState.isValid} subTotal={subTotal} envio={COSTO_ENVIO} handlerSubmit={handlerSubmit} />
+      <CardSummary isValid={!formState.isValid || subTotal === 0} subTotal={subTotal} envio={COSTOENVIO} handlerSubmit={handlerSubmit} />
       {
         loading && <Spinner />}
     </FormStyled>

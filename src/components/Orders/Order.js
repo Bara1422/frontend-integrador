@@ -5,12 +5,13 @@ import { DialogFooter, ConfirmButton, DialogShadow } from '../ComponentDialog/Co
 import { useSelector, useDispatch } from 'react-redux';
 import { QuantityManage } from './QuantityManage';
 import * as cartActions from '../../redux/cart/cart-actions';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export const Order = () => {
   const hidden = useSelector(state => state.cart.hidden);
   const cartItems = useSelector(state => state.cart.cartItems);
+  const navigate = useNavigate();
   const total = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
@@ -18,6 +19,8 @@ export const Order = () => {
 
   const handleClearCart = () => {
     dispatch(cartActions.clearCart());
+    dispatch(cartActions.toggleCartHidden());
+    navigate('/products');
   };
 
   const handleToggle = () => {
@@ -32,30 +35,33 @@ export const Order = () => {
         <OrderContent>
           <OrderContainer>
             Tu pedido:
-            <ClearCartButton onClick={handleClearCart}>Vaciar carrito</ClearCartButton>
+            {
+              cartItems?.length === 0 ? (
+                <ClearCartButton disabled={'disabled'}>Vaciar carrito</ClearCartButton>
+              ) : (<ClearCartButton onClick={handleClearCart}>Vaciar carrito</ClearCartButton>)
+            }
           </OrderContainer>
-          {cartItems.map(item => (
-            <OrderContainer key={item.id}>
-              <OrderItem>
-                <ItemImg img={item.img} />
-                <div>
-                  <div>{item.name}</div>
-                  <p>{formatPrice(item.price * item.quantity)}</p>
-                </div>
-                <QuantityManage item={item} />
-              </OrderItem>
-            </OrderContainer>
-          ))}
+          {
+            cartItems.map(item => (
+              <OrderContainer key={item.id} >
+                <OrderItem>
+                  <ItemImg img={item.img} />
+                  <div>
+                    <div>{item.name}</div>
+                    <p>{formatPrice(item.price * item.quantity)}</p>
+                  </div>
+                  <QuantityManage item={item} />
+                </OrderItem>
+              </OrderContainer>
+            ))
+          }
         </OrderContent>
 
         <DialogFooter>
           <Link to='/checkout' onClick={handleToggle}>
             {
-              cartItems?.length === 0 ? (
-                <ConfirmButton disabled={'disabled'}>Ir a pagar {formatPrice(total)}</ConfirmButton>
-              ) : (
-                <ConfirmButton >Ir a pagar {formatPrice(total)}</ConfirmButton>
-              )
+              cartItems?.length !== 0 && <ConfirmButton >Ir a pagar {formatPrice(total)}</ConfirmButton>
+
             }
           </Link>
         </DialogFooter>

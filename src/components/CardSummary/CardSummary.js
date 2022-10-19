@@ -14,7 +14,11 @@ export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
           </LiCard>
           <LiCard>
             <p>Costo de envío</p>
-            <span>{formatPrice(envio)}</span>
+            {
+              (subTotal !== 0)
+                ? (<span>{formatPrice(envio)}</span>)
+                : (<span>{formatPrice(envio = 0)}</span>)
+            }
           </LiCard>
           <RowCard />
           <TotalCard>

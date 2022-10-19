@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Banner = styled.div`
   max-height: 80vh;
   height: 50rem;

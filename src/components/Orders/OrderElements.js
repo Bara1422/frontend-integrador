@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { below } from "../../Styles/utilities";
 import { ConfirmButton, DialogContent } from '../ComponentDialog/ComponentDialogElements';
 
@@ -68,4 +68,13 @@ export const ClearCartButton = styled(ConfirmButton)`
   width: 100px;
   font-size: 13px;
   margin: 0;
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background-color: #ccc !important;
+      color: #fff;
+      border: 0px rgb(184, 182, 182) solid;
+      cursor: not-allowed !important;
+      transition: 0.5s ease-out;
+`}
 `;

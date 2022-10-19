@@ -15,7 +15,6 @@ export const CartIcon = ({ shake }) => {
   };
 
   useEffect(() => {
-    console.log(shake);
     shake
       ? ref.current.classList.add('shake')
       : ref.current.classList.remove('shake');
