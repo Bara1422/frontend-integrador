@@ -6,10 +6,17 @@ import 'aos/dist/aos.css';
 
 const Contact = () => {
 
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm({
+    defaultValues: {
+      nombre: '',
+      email: '',
+      mensaje: '',
+    }
+  });
 
   const customSubmit = (data, e) => {
     alert(`${data.nombre}, nos contactaremos a la brevedad.`);
+    reset();
   };
   const onError = (errors, e) => {
     console.log(errors, e);
