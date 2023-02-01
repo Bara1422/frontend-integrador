@@ -19,9 +19,12 @@ import { useAxios } from './context/AxiosContext';
 
 
 function App() {
-  const { currentUser } = useAuth();
+  const { currentUser, authCheckState } = useAuth();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    authCheckState();
+  }, []);
   /* useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
       if (currentUser) {

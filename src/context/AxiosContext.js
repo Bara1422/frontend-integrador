@@ -23,15 +23,15 @@ export function AxiosProvider({ children }) {
     axios.interceptors.request.use((config) => {
       const data = localStorage.getItem('authData') || null;
       const authData = data ? JSON.parse(data) : null;
-      if (authData?.result.token) {
-        config.headers.Authorization = `Bearer ${authData.result.token}`;
+      if (authData?.token) {
+        config.headers.Authorization = `Bearer ${authData.token}`;
       }
       return config;
     });
     instance.interceptors.request.use((config) => {
       const data = localStorage.getItem('authData') || null;
       const authData = data ? JSON.parse(data) : null;
-      if (authData?.result.token) {
+      if (authData?.token) {
         config.headers.Authorization = `Bearer ${authData.result.token}`;
       }
       return config;

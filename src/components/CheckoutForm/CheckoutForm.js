@@ -74,6 +74,7 @@ export const CheckoutForm = () => {
       return;
     }
     const stringData = localStorage.getItem('authData');
+    console.log(stringData);
     const authData = JSON.parse(stringData);
     console.log(authData);
     const orderData = {

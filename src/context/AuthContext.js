@@ -10,6 +10,7 @@ import React, {
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../context/AxiosContext';
+import { useEffect } from 'react';
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -33,7 +34,6 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
-  const toast = useToast();
   const history = useNavigate();
   const axios = useAxios();
   const [currentUser, setCurrentUser] = useState(null);
@@ -51,8 +51,11 @@ function useProvideAuth() {
 
   const checkAuthTimeout = useCallback(
     (expirationTime) => {
+      console.log('checkAuthTimeout ->', new Date(expirationTime));
+      console.log(expirationTime);
       setTimeout(() => {
         logout();
+        console.log('checkAuthTimeout -> Run Auto logout');
       }, expirationTime);
     },
     [logout]
@@ -70,33 +73,33 @@ function useProvideAuth() {
         const expirationDate = new Date(
           new Date().getTime() + response.data.result.expiresIn
         ).getTime();
-        localStorage.setItem('authData', JSON.stringify(response.data));
+        console.log(expirationDate);
+        console.log(new Date(expirationDate));
+        history('/');
+        console.log(response);
+        localStorage.setItem('authData', JSON.stringify(response.data.result));
         localStorage.setItem('expirationDate', expirationDate.toString());
-        setCurrentUser(response.data.result.name);
+        setCurrentUser(response.data.result);
         setLoading(false);
         setError(null);
         checkAuthTimeout(response.data.result.expiresIn);
-        history('/');
-        console.log(response.data.result.name);
-        console.log(response);
 
+        console.log(expirationDate.toString());
+        console.log(expirationDate);
+
+        console.log(response.data.result.expiresIn);
+        console.log(response.data.result);
+        console.log(response.data);
       } catch (error) {
+        console.log(error);
         setLoading(false);
-        let newError = error.response.data.errors.flatMap(
-          (item) => item.message
-        );
+        let err = error;
+        let errorRes = err.response?.data ? err.response?.data : null;
 
-        setError(newError.join(' '));
-        toast({
-          title: 'Login Error',
-          description: newError.join(', '),
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-        });
+        setError(errorRes);
       }
     },
-    [checkAuthTimeout, history, axios, toast]
+    [checkAuthTimeout, history, axios]
   );
 
   const ordersFetch = useCallback(async (userId) => {
@@ -132,48 +135,55 @@ function useProvideAuth() {
         const expirationDate = new Date(
           new Date().getTime() + response.data.result.expiresIn
         ).getTime();
-        localStorage.setItem('authData', JSON.stringify(response.data));
+        history('/');
+        localStorage.setItem('authData', JSON.stringify(response.data.result));
         localStorage.setItem('expirationDate', expirationDate.toString());
-        setCurrentUser(response.data.result.name);
+        setCurrentUser(response.data.result);
         setLoading(false);
         setError(null);
         checkAuthTimeout(response.data.result.expiresIn);
-        history('/');
       } catch (error) {
+        console.log(error);
         setLoading(false);
-        let newError = error.response.data.errors.map((item) => item.message);
-        setError(newError);
-        toast({
-          title: 'Register Error',
-          description: newError.join(', '),
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-        });
+        let err = error;
+        let errorRes = err.response?.data ? err.response?.data : null;
+
+        setError(errorRes);
       }
     },
-    [axios, toast, history, checkAuthTimeout]
+    [axios, history, checkAuthTimeout]
   );
 
   const authCheckState = useCallback(() => {
     const stringData = localStorage.getItem('authData');
     const authData = JSON.parse(String(stringData));
-    if (!authData) {
+    console.log(authData);
+
+    if (!authData?.token) {
       logout();
     } else {
       const expirationDate = new Date(
         parseInt(localStorage.getItem('expirationDate'))
       );
-      if (expirationDate > new Date()) {
+      console.log(localStorage.getItem('expirationDate'));
+      console.log(parseInt(localStorage.getItem('expirationDate')));
+      console.log(expirationDate);
+      console.log((expirationDate.getTime() - new Date().getTime()));
+      console.log(new Date().getTime());
+      if (expirationDate.getTime() > new Date().getTime()) {
         checkAuthTimeout(
-          (expirationDate.getTime() - new Date().getTime()) / 1000
+          (expirationDate.getTime() - new Date().getTime())
         );
         setCurrentUser(authData);
       } else {
-        logout();
+        console.log('hola');
       }
     }
   }, [logout, checkAuthTimeout]);
+
+  useEffect(() => {
+    authCheckState();
+  }, []);
 
   return useMemo(() => {
     return {
