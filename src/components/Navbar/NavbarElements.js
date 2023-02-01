@@ -17,7 +17,7 @@ export const NavbarStyled = styled.div`
   border-bottom: 1px solid #e5edef;
   ${below.small`
     padding-left: 5px;
-    display: block;
+    
   `}
 `;
 
@@ -27,11 +27,11 @@ export const Logo = styled.img`
   margin-left: 2rem;
   height: auto;
   ${below.large`
-    max-width: 45px;
+    max-width: 55px;
   `}
   ${below.small`
-    margin-left: 0.5rem;
-    max-width: 35px;
+    
+    
     height:auto;
   `}
 `;
@@ -95,7 +95,7 @@ export const LinkStyled = styled(Link)`
       transition: 0.5s;
     }
     ${below.large`
-      font-size: 2rem;
+      display: none
     `}
     ${below.small`
       font-size: 2rem;

@@ -69,6 +69,11 @@ export const ComponentsStyled = styled.div`
   ${below.small`
     margin: 0;
   `}
+  & h2 {
+    ${below.small`
+      padding-top: 2rem
+    `}
+  }
 `;
 
 export const ComponentCard = styled.div`

@@ -8,32 +8,27 @@ import { Link } from 'react-router-dom';
 import * as cartActions from '../../redux/cart/cart-actions';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useAuth } from '../../context/AuthContext';
 
 export const UserMenu = ({ user }) => {
   const { hiddenMenu } = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const { logout } = useAuth();
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
-
   const handleToggle = () => {
-    dispatch(userActions.toggleMenuHidden());
     dispatch(cartActions.cartHidden());
+    dispatch(userActions.toggleMenuHidden());
+  };
 
-  };
-  const logout = () => {
-    signOut(auth).then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
-  };
+
   return (
     <>
       {!hiddenMenu && <Shadow onClick={handleToggle} />}
       {
-        !hiddenMenu ? (<UserMenuStyled data-aos='fade-right' >
-          <WelcomeTitle >Hola {user.displayName.toUpperCase()}</WelcomeTitle>
+        (!hiddenMenu) ? (<UserMenuStyled data-aos='fade-right' >
+          <WelcomeTitle >Hola {user.toUpperCase()}</WelcomeTitle>
           <MenuOptions>
             <Link to='/mis-ordenes' onClick={handleToggle}>
               <MenuOptionElement >Mís ordenes</MenuOptionElement>

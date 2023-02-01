@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import { GlobalStyle } from './Styles/GlobalStyle';
 import { Navbar } from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -13,16 +12,17 @@ import Login from './pages/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth } from './firebase/firebase.utils2';
 import * as userActions from './redux/user/user-actions';
-import { onAuthStateChanged } from "firebase/auth";
+
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { useAxios } from './context/AxiosContext';
 
 
 
 function App() {
-  const currentUser = useSelector(state => state.user.currentUser);
+  const { currentUser } = useAuth();
   const dispatch = useDispatch();
 
-
-  useEffect(() => {
+  /* useEffect(() => {
     onAuthStateChanged(auth, currentUser => {
       if (currentUser) {
         dispatch(userActions.setCurrentUser(currentUser));
@@ -30,22 +30,26 @@ function App() {
         dispatch(userActions.setCurrentUser(null));
       }
     });
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
+
     <Router>
-      <GlobalStyle />
-      <Navbar />
-      <Order />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/products' element={<Products />}></Route>
-        <Route path='/checkout' element={currentUser ? <Checkout /> : <Navigate to='/login' />}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/mis-ordenes' element={currentUser ? <Orders /> : <Navigate to='/login' />}></Route>
-        <Route path={`/mis-ordenes/:orderId`} element={currentUser ? <Resume /> : <Navigate to='/login' />}></Route>
-      </Routes>
+      <AuthProvider>
+        <GlobalStyle />
+        <Navbar />
+        <Order />
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/products' element={<Products />}></Route>
+          <Route path='/checkout' element={<Checkout />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/mis-ordenes' element={currentUser ? <Orders /> : <Navigate to='/login' />}></Route>
+          <Route path={`/mis-ordenes/:orderId`} element={currentUser ? <Resume /> : <Navigate to='/login' />}></Route>
+        </Routes>
+      </AuthProvider>
     </Router>
+
 
   );
 };

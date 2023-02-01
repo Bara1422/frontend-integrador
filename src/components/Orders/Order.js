@@ -6,9 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { QuantityManage } from './QuantityManage';
 import * as cartActions from '../../redux/cart/cart-actions';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { Spinner } from '@chakra-ui/react';
 
 
 export const Order = () => {
+  const { ordersFetch, loading, currentUser } = useAuth();
   const hidden = useSelector(state => state.cart.hidden);
   const cartItems = useSelector(state => state.cart.cartItems);
   const navigate = useNavigate();
@@ -16,7 +19,11 @@ export const Order = () => {
     return acc + item.price * item.quantity;
   }, 0);
   const dispatch = useDispatch();
-
+  console.log();
+  const stringData = localStorage.getItem('authData');
+  const authData = JSON.parse(String(stringData));
+  console.log(authData);
+  console.log('authData');
   const handleClearCart = () => {
     dispatch(cartActions.clearCart());
     dispatch(cartActions.toggleCartHidden());
@@ -45,7 +52,7 @@ export const Order = () => {
             cartItems.map(item => (
               <OrderContainer key={item.id} >
                 <OrderItem>
-                  <ItemImg img={item.img} />
+                  <ItemImg img={item.imgUrl} />
                   <div>
                     <div>{item.name}</div>
                     <p>{formatPrice(item.price * item.quantity)}</p>
@@ -60,7 +67,7 @@ export const Order = () => {
         <DialogFooter>
           <Link to='/checkout' onClick={handleToggle}>
             {
-              cartItems?.length !== 0 && <ConfirmButton >Ir a pagar {formatPrice(total)}</ConfirmButton>
+              cartItems?.length !== 0 && <ConfirmButton >{loading ? <Spinner /> : 'Ir a pagar'} {formatPrice(total)}</ConfirmButton>
 
             }
           </Link>
