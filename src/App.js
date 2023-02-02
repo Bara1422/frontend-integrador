@@ -9,34 +9,17 @@ import Home from './pages/Home';
 import Orders from './pages/Orders';
 import Resume from './pages/Resume';
 import Login from './pages/Login';
-import { useSelector, useDispatch } from 'react-redux';
-import { auth } from './firebase/firebase.utils2';
-import * as userActions from './redux/user/user-actions';
-
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { useAxios } from './context/AxiosContext';
-
-
 
 function App() {
   const { currentUser, authCheckState } = useAuth();
-  const dispatch = useDispatch();
-
+  
   useEffect(() => {
     authCheckState();
+    console.log(currentUser);
   }, []);
-  /* useEffect(() => {
-    onAuthStateChanged(auth, currentUser => {
-      if (currentUser) {
-        dispatch(userActions.setCurrentUser(currentUser));
-      } else {
-        dispatch(userActions.setCurrentUser(null));
-      }
-    });
-  }, [dispatch]); */
 
   return (
-
     <Router>
       <AuthProvider>
         <GlobalStyle />

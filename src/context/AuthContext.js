@@ -51,11 +51,8 @@ function useProvideAuth() {
 
   const checkAuthTimeout = useCallback(
     (expirationTime) => {
-      console.log('checkAuthTimeout ->', new Date(expirationTime));
-      console.log(expirationTime);
       setTimeout(() => {
         logout();
-        console.log('checkAuthTimeout -> Run Auto logout');
       }, expirationTime);
     },
     [logout]
@@ -73,8 +70,6 @@ function useProvideAuth() {
         const expirationDate = new Date(
           new Date().getTime() + response.data.result.expiresIn
         ).getTime();
-        console.log(expirationDate);
-        console.log(new Date(expirationDate));
         history('/');
         console.log(response);
         localStorage.setItem('authData', JSON.stringify(response.data.result));
@@ -83,13 +78,6 @@ function useProvideAuth() {
         setLoading(false);
         setError(null);
         checkAuthTimeout(response.data.result.expiresIn);
-
-        console.log(expirationDate.toString());
-        console.log(expirationDate);
-
-        console.log(response.data.result.expiresIn);
-        console.log(response.data.result);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -106,10 +94,9 @@ function useProvideAuth() {
     setLoading(true);
     try {
       const response = await axios.get('/orders/:id');
-      console.log(response);
-      console.log(response.data.data.result);
+
       const responseMap = response.data.data.result.filter(order => order.userId === userId);
-      console.log(responseMap);
+
       setLoading(false);
       setError(null);
     } catch (error) {
@@ -158,18 +145,12 @@ function useProvideAuth() {
     const stringData = localStorage.getItem('authData');
     const authData = JSON.parse(String(stringData));
     console.log(authData);
-
     if (!authData?.token) {
       logout();
     } else {
       const expirationDate = new Date(
         parseInt(localStorage.getItem('expirationDate'))
       );
-      console.log(localStorage.getItem('expirationDate'));
-      console.log(parseInt(localStorage.getItem('expirationDate')));
-      console.log(expirationDate);
-      console.log((expirationDate.getTime() - new Date().getTime()));
-      console.log(new Date().getTime());
       if (expirationDate.getTime() > new Date().getTime()) {
         checkAuthTimeout(
           (expirationDate.getTime() - new Date().getTime())

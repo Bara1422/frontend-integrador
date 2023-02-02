@@ -9,6 +9,7 @@ import { Input, Spinner } from '@chakra-ui/react';
 import { useSelector } from "react-redux";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 
 
@@ -20,8 +21,9 @@ const Login = () => {
   const [name, setName] = useState('');
   const { loading, login, currentUser, signin } = useAuth();
   const navigate = useNavigate();
-  console.log(login);
   console.log(currentUser);
+
+
 
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formState, inputHandler, setFormData] = useForm(
@@ -38,9 +40,7 @@ const Login = () => {
     false
   );
 
-  if (currentUser) {
-    navigate(-1);
-  }
+
   console.log(currentUser);
 
   const switchModeHandler = () => {
@@ -73,6 +73,9 @@ const Login = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
+  if (currentUser) {
+    navigate(-1);
+  }
   return (
     <LayoutPage>
       <Wrapper>

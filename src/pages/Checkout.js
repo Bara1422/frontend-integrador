@@ -1,19 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { CheckoutForm } from '../components/CheckoutForm/CheckoutForm';
 import { Wrapper, LayoutPage } from '../components/UI';
 
-import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../context/AuthContext';
 
 
 const Checkout = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-
   console.log(currentUser);
 
-  if (currentUser)
+  if (currentUser) {
     return (
       <LayoutPage>
         <Wrapper>
@@ -21,6 +21,9 @@ const Checkout = () => {
         </Wrapper>
       </LayoutPage>
     );
+  } else {
+    navigate('/login');
+  }
 };
 
 export default Checkout;

@@ -19,11 +19,8 @@ export const Order = () => {
     return acc + item.price * item.quantity;
   }, 0);
   const dispatch = useDispatch();
-  console.log();
   const stringData = localStorage.getItem('authData');
   const authData = JSON.parse(String(stringData));
-  console.log(authData);
-  console.log('authData');
   const handleClearCart = () => {
     dispatch(cartActions.clearCart());
     dispatch(cartActions.toggleCartHidden());
@@ -32,6 +29,11 @@ export const Order = () => {
 
   const handleToggle = () => {
     dispatch(cartActions.toggleCartHidden());
+    if (currentUser) {
+      navigate('/checkout');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
