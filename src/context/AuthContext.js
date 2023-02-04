@@ -7,7 +7,6 @@ import React, {
   useCallback,
   useMemo,
 } from 'react';
-import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../context/AxiosContext';
 import { useEffect } from 'react';
@@ -90,25 +89,6 @@ function useProvideAuth() {
     [checkAuthTimeout, history, axios]
   );
 
-  const ordersFetch = useCallback(async (userId) => {
-    setLoading(true);
-    try {
-      const response = await axios.get('/orders/:id');
-
-      const responseMap = response.data.data.result.filter(order => order.userId === userId);
-
-      setLoading(false);
-      setError(null);
-    } catch (error) {
-      setLoading(false);
-      let newError = error.response.data.errors.flatMap(
-        (item) => item.message
-      );
-      setError(newError);
-
-    }
-  }, [axios]);
-
   const signin = useCallback(
     async (name, email, password) => {
       setLoading(true);
@@ -157,7 +137,7 @@ function useProvideAuth() {
         );
         setCurrentUser(authData);
       } else {
-        console.log('hola');
+        logout();
       }
     }
   }, [logout, checkAuthTimeout]);
@@ -176,7 +156,7 @@ function useProvideAuth() {
       logout,
       signin,
       authCheckState,
-      ordersFetch
+
     };
   }, [
     currentUser,
@@ -187,6 +167,6 @@ function useProvideAuth() {
     logout,
     signin,
     authCheckState,
-    ordersFetch
+
   ]);
 }

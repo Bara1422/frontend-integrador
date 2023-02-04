@@ -12,27 +12,12 @@ export function AxiosProvider({ children }) {
       }
     }
     );
-    const instance = Axios.create({
-      baseURL: `http://localhost:3000`,
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }
-    );
     // INTERCEPTOR
     axios.interceptors.request.use((config) => {
       const data = localStorage.getItem('authData') || null;
       const authData = data ? JSON.parse(data) : null;
       if (authData?.token) {
         config.headers.Authorization = `Bearer ${authData.token}`;
-      }
-      return config;
-    });
-    instance.interceptors.request.use((config) => {
-      const data = localStorage.getItem('authData') || null;
-      const authData = data ? JSON.parse(data) : null;
-      if (authData?.token) {
-        config.headers.Authorization = `Bearer ${authData.result.token}`;
       }
       return config;
     });

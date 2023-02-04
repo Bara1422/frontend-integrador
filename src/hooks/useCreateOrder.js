@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useAxios } from "../context/AxiosContext";
 
@@ -21,6 +20,7 @@ export const useCreateOrder = () => {
         total: subtotal + 250,
       });
       const { data: respuesta } = response;
+      console.log(respuesta);
       setInitPoint(respuesta.data.result.init_point);
 
       setOla(response);

@@ -1,4 +1,4 @@
- export const componentItem = [
+ /* export const componentItem = [
   {
     key: 1,
     id: 1,
@@ -68,4 +68,4 @@ export const arraySections = [
    res[comp.category] = [...res[comp.category], comp];
 
   return res;
-}, {}); 
+}, {});  */

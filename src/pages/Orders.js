@@ -1,36 +1,20 @@
-
-import { current } from "@reduxjs/toolkit";
-import { useEffect } from "react";
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import { MyOrders } from "../components/MyOrders/MyOrders";
 import { LayoutPage, Wrapper } from "../components/UI";
-import { useAuth } from "../context/AuthContext";
-
-import * as orderActions from '../redux/orders/order-actions';
-
-
+import { useOrdersById } from "../hooks/useCategories";
 
 const Orders = () => {
-  const { currentUser, ordersFetch } = useAuth();
-  let { orders, error } = useSelector(state => state.orders);
-  //USar react query
-
-  
-
-  const dispatch = useDispatch();
-  const fetchOrders = useCallback(async () => {
-    dispatch(orderActions.fetchOrders(currentUser.uid));
-  }, [dispatch, currentUser]);
-
-  useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
+  const ordersId = useOrdersById();
+  const { isLoading } = useQuery(['orderss']);
+  console.log(ordersId);
 
   return (
     <LayoutPage>
       <Wrapper>
-        <MyOrders orders={orders} />
+        {isLoading ? (<Spinner></Spinner>) : (
+          <MyOrders orders={ordersId.data} />
+        )}
       </Wrapper>
     </LayoutPage>
   );

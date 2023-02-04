@@ -11,8 +11,6 @@ import { useAuth } from '../context/AuthContext';
 const Checkout = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  console.log(currentUser);
-
   if (currentUser) {
     return (
       <LayoutPage>

@@ -4,26 +4,16 @@ import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../util
 import { Wrapper, LayoutPage, FormStyled, FormContent, CustomButton } from '../components/UI';
 import { Containerbuttons, ALink } from "./LoginElements";
 import { Input, Spinner } from '@chakra-ui/react';
-
-
-import { useSelector } from "react-redux";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from "react";
-
-
 
 
 const Login = () => {
-  // const currentUser = useSelector((state) => state.user.currentUser);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const { loading, login, currentUser, signin } = useAuth();
   const navigate = useNavigate();
-  console.log(currentUser);
-
-
 
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formState, inputHandler, setFormData] = useForm(
@@ -39,9 +29,6 @@ const Login = () => {
     },
     false
   );
-
-
-  console.log(currentUser);
 
   const switchModeHandler = () => {
     if (!isLoginMode) {

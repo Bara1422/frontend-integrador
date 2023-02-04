@@ -11,7 +11,7 @@ import { Spinner } from '@chakra-ui/react';
 
 
 export const Order = () => {
-  const { ordersFetch, loading, currentUser } = useAuth();
+  const {  loading} = useAuth();
   const hidden = useSelector(state => state.cart.hidden);
   const cartItems = useSelector(state => state.cart.cartItems);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export const Order = () => {
   }, 0);
   const dispatch = useDispatch();
   const stringData = localStorage.getItem('authData');
-  const authData = JSON.parse(String(stringData));
+  const authData = JSON.parse(stringData);
   const handleClearCart = () => {
     dispatch(cartActions.clearCart());
     dispatch(cartActions.toggleCartHidden());
@@ -29,7 +29,7 @@ export const Order = () => {
 
   const handleToggle = () => {
     dispatch(cartActions.toggleCartHidden());
-    if (currentUser) {
+    if (authData !== null) {
       navigate('/checkout');
     } else {
       navigate('/login');
@@ -67,12 +67,14 @@ export const Order = () => {
         </OrderContent>
 
         <DialogFooter>
-          <Link to='/checkout' onClick={handleToggle}>
+          <Link to={authData ? '/checkout' : '/login'} onClick={handleToggle}>
             {
-              cartItems?.length !== 0 && <ConfirmButton >{loading ? <Spinner /> : 'Ir a pagar'} {formatPrice(total)}</ConfirmButton>
-
+              cartItems?.length !== 0 && <ConfirmButton >{loading ? <Spinner /> : 'Ir a pagar'}  {formatPrice(total)}</ConfirmButton>
             }
           </Link>
+
+
+
         </DialogFooter>
       </OrderStyled>
     </>

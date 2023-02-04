@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { formatPrice, formatDate } from '../../utils/formatPrice';
+import { formatPrice } from '../../utils/formatPrice';
 import { CustomButton } from '../UI';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -17,9 +17,12 @@ import {
   StatusContainerStyled,
 } from './MyOrdersElements';
 
+import { useState } from 'react';
 
 export const MyOrders = ({ orders }) => {
 
+  const [currentOrderId, setCurrentOrderId] = useState(null);
+  const currentid = currentOrderId;
 
   return (
     <Container>
@@ -35,11 +38,12 @@ export const MyOrders = ({ orders }) => {
 
             {orders.map(order => (
               <OrderContent key={uuidv4()}>
+
                 <OrderDetails>
                   <OrderUl >
                     <OrderLi >
                       <OrderSpan>Fecha:</OrderSpan>
-                      {formatDate(new Date(order.createdAt.seconds))}
+                      {order.createdAt}
                     </OrderLi>
                     <OrderLi>
                       <OrderSpan>Total:</OrderSpan>
@@ -47,10 +51,10 @@ export const MyOrders = ({ orders }) => {
                     </OrderLi >
                   </OrderUl>
                   <StatusContainerStyled>
-                    <Status type={order.status}>{order.status}</Status>
+                    <Status type={order.statusId}>'pending'</Status>
                   </StatusContainerStyled>
                   <Flex>
-                    <Link to={`${order.id}`}>
+                    <Link to={`${order.id}/order-items`} onClick={() => { setCurrentOrderId(order.id); }} currentid={currentid} data={orders}>
                       <CustomButton w='150px' m='0'>
                         Ver resumen
                       </CustomButton>
@@ -62,6 +66,6 @@ export const MyOrders = ({ orders }) => {
           </div>
         </Wrapper>
       </OrderHistory>
-    </Container>
+    </Container >
   );
 };

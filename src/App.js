@@ -12,12 +12,15 @@ import Login from './pages/Login';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 function App() {
-  const { currentUser, authCheckState } = useAuth();
-  
+  const { authCheckState } = useAuth();
+
+
   useEffect(() => {
     authCheckState();
-    console.log(currentUser);
   }, []);
+
+  const stringData = localStorage.getItem('authData');
+  const authData = JSON.parse(stringData);
 
   return (
     <Router>
@@ -28,10 +31,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/products' element={<Products />}></Route>
-          <Route path='/checkout' element={<Checkout />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/mis-ordenes' element={currentUser ? <Orders /> : <Navigate to='/login' />}></Route>
-          <Route path={`/mis-ordenes/:orderId`} element={currentUser ? <Resume /> : <Navigate to='/login' />}></Route>
+          <Route path='/checkout' element={authData ? <Checkout /> : <Navigate to='/login' />}></Route>
+          <Route path='/login' element={!authData ? <Login /> : <Navigate to='/' />}></Route>
+          <Route path='/mis-ordenes' element={authData ? <Orders /> : <Navigate to='/login' />}></Route>
+          <Route path={`/mis-ordenes/:orderId/order-items`} element={authData ? <Resume /> : <Navigate to='/login' />}></Route>
         </Routes>
       </AuthProvider>
     </Router>
