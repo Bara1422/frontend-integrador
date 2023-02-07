@@ -10,11 +10,13 @@ import * as userActions from '../../redux/user/user-actions';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useAuth } from '../../context/AuthContext';
+import { authData } from '../../utils/authData';
 
 export const Navbar = ({ shake }) => {
-  const { currentUser } = useAuth();
+  const { currentUser, isAuthenticated, authCheckState } = useAuth();
   const dispatch = useDispatch();
   console.log(currentUser);
+  console.log(isAuthenticated);
   const handleToggle = () => {
     dispatch(userActions.toggleMenuHidden());
   };
@@ -24,8 +26,11 @@ export const Navbar = ({ shake }) => {
   };
   useEffect(() => {
     AOS.init({ duration: 2000 });
-  }, []);
+    authCheckState();
+  }, [authCheckState]);
 
+  console.log(authData);
+  console.log(currentUser);
   return (
 
     <NavbarStyled>
@@ -36,7 +41,7 @@ export const Navbar = ({ shake }) => {
       <NavigationMenu>
         <CartIcon shake={shake} />
         <Divider />
-        {currentUser ? (
+        {currentUser && isAuthenticated ? (
           <>
             <AccountCircleIcon sx={{ fontSize: 26 }} style={{ cursor: 'pointer' }} onClick={handleToggle} data-aos='fade-left' />
             <UserMenu user={currentUser} />

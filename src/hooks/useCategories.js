@@ -1,6 +1,7 @@
 import { useAxios } from "../context/AxiosContext";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export const useCategories = () => {
   const axios = useAxios();
@@ -11,11 +12,14 @@ export const useCategories = () => {
   });
 };
 
-export const useOrdersById = () => {
+export const useOrdersById = (userId) => {
   const stringData = localStorage.getItem('authData');
   const authData = JSON.parse(stringData);
   const axios = useAxios();
-  return useQuery(['orderss'], async () => {
+  const { currentUser } = useAuth();
+  console.log(currentUser);
+  console.log(authData);
+  return useQuery(['orderss', currentUser.userId], async () => {
     const { data } = await axios.get('orders');
     const orders = await data.data.result;
     const filteredOrders = await orders.filter(order => order.userId === authData.userId);
@@ -30,6 +34,7 @@ export const useOrdersById = () => {
     });
     console.log(ordersEnd);
     return ordersEnd;
+    
   });
 };
 
@@ -38,10 +43,8 @@ export const useGetOrdersByOrderId = (orderId) => {
   const stringData = localStorage.getItem('authData');
   const authData = JSON.parse(stringData);
   const axios = useAxios();
-  return useQuery([ordersId], async () => {
+  return useQuery([orderId], async () => {
     const { data } = await axios.get(`orders/${orderId}/order-items`);
-    if (!data || !data.some(order => order.userId === authData.userId))
-      console.log(data);
     return data;
   });
 };

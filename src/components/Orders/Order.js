@@ -11,7 +11,7 @@ import { Spinner } from '@chakra-ui/react';
 
 
 export const Order = () => {
-  const {  loading} = useAuth();
+  const { loading, currentUser } = useAuth();
   const hidden = useSelector(state => state.cart.hidden);
   const cartItems = useSelector(state => state.cart.cartItems);
   const navigate = useNavigate();
@@ -29,16 +29,21 @@ export const Order = () => {
 
   const handleToggle = () => {
     dispatch(cartActions.toggleCartHidden());
-    if (authData !== null) {
+    if (authData !== null | currentUser) {
       navigate('/checkout');
     } else {
       navigate('/login');
     }
   };
 
+  const handleToggleCart = () => {
+    dispatch(cartActions.toggleCartHidden());
+  };
+
+  console.log(authData, currentUser);
   return (
     <>
-      {hidden && <DialogShadow onClick={handleToggle} />}
+      {hidden && <DialogShadow onClick={handleToggleCart} />}
       <OrderStyled show={hidden}>
 
         <OrderContent>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/formatPrice';
 import { CustomButton } from '../UI';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,14 +17,26 @@ import {
   StatusContainerStyled,
 } from './MyOrdersElements';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { authData } from '../../utils/authData';
 
 export const MyOrders = ({ orders }) => {
-
+  const { currentUser, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [currentOrderId, setCurrentOrderId] = useState(null);
   const currentid = currentOrderId;
 
+  useEffect(() => {
+    if (!authData && !currentUser) {
+      navigate('/login');
+    }
+  }, [currentUser, navigate]);
+  console.log(authData);
+  console.log(isAuthenticated);
+  console.log(currentUser);
   return (
+
     <Container>
       <OrderHistory>
         <Wrapper>
@@ -54,7 +66,7 @@ export const MyOrders = ({ orders }) => {
                     <Status type={order.statusId}>'pending'</Status>
                   </StatusContainerStyled>
                   <Flex>
-                    <Link to={`${order.id}/order-items`} onClick={() => { setCurrentOrderId(order.id); }} currentid={currentid} data={orders}>
+                    <Link to={`${order.id}/order-items`}>
                       <CustomButton w='150px' m='0'>
                         Ver resumen
                       </CustomButton>
@@ -66,6 +78,7 @@ export const MyOrders = ({ orders }) => {
           </div>
         </Wrapper>
       </OrderHistory>
+
     </Container >
   );
 };

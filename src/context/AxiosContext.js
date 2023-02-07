@@ -20,7 +20,8 @@ export function AxiosProvider({ children }) {
         config.headers.Authorization = `Bearer ${authData.token}`;
       }
       return config;
-    });
+    },
+      error => { return Promise.reject(error); });
     return axios;
   }, []);
 

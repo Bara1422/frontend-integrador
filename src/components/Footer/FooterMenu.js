@@ -17,11 +17,9 @@ const FooterMenu = () => {
             duration={500}
             style={{ cursor: 'pointer' }}
           >Nosotros</LinkScroll>
-          {/* <a href="#nosotros">Nosotros</a> */}
         </li>
         <li>
           <LinkStyled to='/products'>Productos</LinkStyled>
-          {/*   <a href="/src/products.html">Productos</a> */}
         </li>
         <li>
           <LinkScroll

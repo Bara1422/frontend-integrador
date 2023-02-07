@@ -20,6 +20,8 @@ import {
   Button
 } from '@chakra-ui/react';
 import { formatPrice } from "../../utils/formatPrice";
+import { useEffect } from "react";
+import { useOrdersById } from "../../hooks/useCategories";
 
 
 
@@ -27,10 +29,11 @@ import { formatPrice } from "../../utils/formatPrice";
 export const CheckoutForm = () => {
   const { initPoint, createOrder } = useCreateOrder();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { loading } = useAuth();
+  const { loading, currentUser } = useAuth();
   const stringData = localStorage.getItem('authData');
   const authData = JSON.parse(stringData);
   const { cartItems } = useSelector(state => state.cart);
+  const { data: ordersId, isLoading, refetch } = useOrdersById();
 
   const item = cartItems.map((product) => {
     return {
@@ -78,7 +81,14 @@ export const CheckoutForm = () => {
   const handlerCart = (e) => {
     dispatch(cartActions.clearCart());
     navigate('/mis-ordenes');
+    refetch();
   };
+
+  useEffect(() => {
+    if (!authData && !currentUser) {
+      navigate('/login');
+    }
+  }, [authData, navigate, currentUser]);
 
   return (
     <FormStyled onSubmit={handlerSubmit}>

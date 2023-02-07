@@ -26,22 +26,37 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '@chakra-ui/react';
 import { useProducts } from '../../hooks/useProducts';
+import { useAxios } from '../../context/AxiosContext';
+import { useAuth } from '../../context/AuthContext';
+import { authData } from '../../utils/authData';
 
 
 export const OrderResume = () => {
   let { orderId } = useParams();
-
+  const { currentUser } = useAuth();
+  const axios = useAxios();
   const { data: ordersId } = useOrdersById();
-  const { data: orders } = useGetOrdersByOrderId(orderId);
-  const { isLoading } = useQuery([orders]);
+  const { data: orders, isLoading } = useGetOrdersByOrderId(orderId);
+  /*   const { isLoading } = useQuery([useGetOrdersByOrderId(orderId)]); */
   const { data: products } = useProducts();
-  console.log('ordersId', ordersId);
-  console.log('getproducts', products);
-  console.log(products);
-  console.log('ordersbyoi', orders);
-  console.log(Number(orderId));
 
+  const hola = async () => {
+    if (products && orders) {
 
+      await orders.map(order => {
+        const product = products.find(product => product.id === order.productsId);
+        if (product) {
+          order.title = product.name;
+          order.imgUrl = product.imgUrl;
+        }
+        return orders;
+      });
+    }
+  };
+
+  console.log(authData);
+  console.log(orders);
+  console.log(currentUser);
   /*   const [orders1, setOrders1] = useState(null);
     const [products1, setProducts1] = useState(null);
   
@@ -63,23 +78,9 @@ export const OrderResume = () => {
     console.log(orders1);
     console.log(products1); */
 
-  useEffect(() => {
 
-    const hola = async () => {
-      if (products && orders)
-        await products.forEach(products => {
-          orders.forEach(orders => {
-            if (products.id === orders.productsId) {
-              orders.title = products.name;
-              orders.imgUrl = products.imgUrl;
-            }
-          });
-        });
-    };
-    hola();
-  }, [orders, products]);
-
-
+  hola();
+  console.log(orders);
   let [orderFilter] = ordersId.filter(order => (order.id === Number(orderId)));
   /*   console.log(orderFilter); */
   return (

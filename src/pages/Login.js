@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useForm from "../hooks/useForm";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../utils/validators';
 import { Wrapper, LayoutPage, FormStyled, FormContent, CustomButton } from '../components/UI';
@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const { loading, login, currentUser, signin } = useAuth();
+  const { loading, login, currentUser, signin, authCheckState, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -60,9 +60,16 @@ const Login = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
-  if (currentUser) {
-    navigate(-1);
-  }
+  useEffect(() => {
+    authCheckState();
+  }, [login, signin, authCheckState]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+
+  }, [isAuthenticated, navigate]);
   return (
     <LayoutPage>
       <Wrapper>

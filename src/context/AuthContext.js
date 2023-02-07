@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   hiddenMenu: true,
   loading: false,
   error: null,
+  isAuthenticated: false,
   login: (email, password) => { },
   logout: () => { },
   authCheckState: () => { },
@@ -35,6 +36,7 @@ export const useAuth = () => {
 function useProvideAuth() {
   const history = useNavigate();
   const axios = useAxios();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [hiddenMenu, setHiddenMenu] = useState(true);
@@ -44,6 +46,7 @@ function useProvideAuth() {
     setCurrentUser(null);
     setLoading(false);
     setError(null);
+    setIsAuthenticated(false);
     localStorage.removeItem('authData');
     localStorage.removeItem('expirationDate');
   }, []);
@@ -69,14 +72,15 @@ function useProvideAuth() {
         const expirationDate = new Date(
           new Date().getTime() + response.data.result.expiresIn
         ).getTime();
-        history('/');
         console.log(response);
         localStorage.setItem('authData', JSON.stringify(response.data.result));
         localStorage.setItem('expirationDate', expirationDate.toString());
+        setIsAuthenticated(true);
         setCurrentUser(response.data.result);
         setLoading(false);
         setError(null);
         checkAuthTimeout(response.data.result.expiresIn);
+        history('/');
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -88,6 +92,10 @@ function useProvideAuth() {
     },
     [checkAuthTimeout, history, axios]
   );
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   const signin = useCallback(
     async (name, email, password) => {
@@ -102,13 +110,14 @@ function useProvideAuth() {
         const expirationDate = new Date(
           new Date().getTime() + response.data.result.expiresIn
         ).getTime();
-        history('/');
         localStorage.setItem('authData', JSON.stringify(response.data.result));
         localStorage.setItem('expirationDate', expirationDate.toString());
+        setIsAuthenticated(true);
         setCurrentUser(response.data.result);
         setLoading(false);
         setError(null);
         checkAuthTimeout(response.data.result.expiresIn);
+        history('/');
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -127,7 +136,9 @@ function useProvideAuth() {
     console.log(authData);
     if (!authData?.token) {
       logout();
+      console.log(authData);
     } else {
+
       const expirationDate = new Date(
         parseInt(localStorage.getItem('expirationDate'))
       );
@@ -135,7 +146,10 @@ function useProvideAuth() {
         checkAuthTimeout(
           (expirationDate.getTime() - new Date().getTime())
         );
+        console.log(authData);
+        setIsAuthenticated(true);
         setCurrentUser(authData);
+        console.log(currentUser);
       } else {
         logout();
       }
@@ -144,7 +158,7 @@ function useProvideAuth() {
 
   useEffect(() => {
     authCheckState();
-  }, []);
+  }, [isAuthenticated]);
 
   return useMemo(() => {
     return {
@@ -156,7 +170,8 @@ function useProvideAuth() {
       logout,
       signin,
       authCheckState,
-
+      setCurrentUser,
+      isAuthenticated
     };
   }, [
     currentUser,
@@ -167,6 +182,7 @@ function useProvideAuth() {
     logout,
     signin,
     authCheckState,
-
+    setCurrentUser,
+    isAuthenticated
   ]);
 }
