@@ -133,7 +133,6 @@ function useProvideAuth() {
   const authCheckState = useCallback(() => {
     const stringData = localStorage.getItem('authData');
     const authData = JSON.parse(String(stringData));
-    console.log(authData);
     if (!authData?.token) {
       logout();
     } else {

@@ -8,7 +8,7 @@ export const useCategories = () => {
   const axios = useAxios();
   return useQuery(['categories'], async () => {
     const { data } = await axios.get('category');
-
+    console.log(data);
     return data.data.result;
   });
 };

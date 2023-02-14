@@ -6,7 +6,7 @@ export const AxiosContext = createContext();
 export function AxiosProvider({ children }) {
   const axios = useMemo(() => {
     const axios = Axios.create({
-      baseURL: `https://integradorbackend-production.up.railway.app/api/v1`,
+      baseURL: `${process.env.REACT_APP_API_BASE_URL}`,
       headers: {
         'Content-Type': 'application/json',
       }
