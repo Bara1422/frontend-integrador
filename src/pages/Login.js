@@ -6,13 +6,14 @@ import { Containerbuttons, ALink } from "./LoginElements";
 import { Input, Spinner } from '@chakra-ui/react';
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
+import LoginBg from '../assets/img/loginBg1.jpeg';
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const { loading, login, currentUser, signin, authCheckState, isAuthenticated } = useAuth();
+  const { loading, login, signin, authCheckState, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -62,16 +63,15 @@ const Login = () => {
 
   useEffect(() => {
     authCheckState();
-  }, [login, signin, authCheckState]);
+  }, [isAuthenticated, authCheckState]);
 
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/');
     }
-
   }, [isAuthenticated, navigate]);
   return (
-    <LayoutPage>
+    <LayoutPage img={LoginBg}>
       <Wrapper>
         <form id='form'>
           <FormStyled>

@@ -21,6 +21,9 @@ export const AboutAsStyled = styled.div`
       width: 80%
     `}
   }
+  h1 {
+    font-size: 2rem;
+  }
 `;
 
 export const LinkAsStyled = styled(Link)`

@@ -7,8 +7,9 @@ export const CheckoutContainerStyled = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  min-height: calc(100vh - 75px);
+  min-height: 100vh;
   background-image: url(${(props) => props.img});
+  /* background-image: url('img/pc-escritorio.jpg'); */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

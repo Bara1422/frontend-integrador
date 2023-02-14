@@ -15,8 +15,7 @@ import { authData } from '../../utils/authData';
 export const Navbar = ({ shake }) => {
   const { currentUser, isAuthenticated, authCheckState } = useAuth();
   const dispatch = useDispatch();
-  console.log(currentUser);
-  console.log(isAuthenticated);
+
   const handleToggle = () => {
     dispatch(userActions.toggleMenuHidden());
   };
@@ -24,13 +23,12 @@ export const Navbar = ({ shake }) => {
   const handleCart = () => {
     dispatch(cartActions.cartHidden());
   };
+
   useEffect(() => {
     AOS.init({ duration: 2000 });
     authCheckState();
   }, [authCheckState]);
 
-  console.log(authData);
-  console.log(currentUser);
   return (
 
     <NavbarStyled>

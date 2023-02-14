@@ -9,7 +9,8 @@ import * as cartActions from '../../redux/cart/cart-actions';
 import { useAuth } from "../../context/AuthContext";
 import { useCreateOrder } from "../../hooks/useCreateOrder";
 import {
-  useDisclosure, Modal,
+  useDisclosure,
+  Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -33,7 +34,7 @@ export const CheckoutForm = () => {
   const stringData = localStorage.getItem('authData');
   const authData = JSON.parse(stringData);
   const { cartItems } = useSelector(state => state.cart);
-  const { data: ordersId, isLoading, refetch } = useOrdersById();
+  const { refetch } = useOrdersById();
 
   const item = cartItems.map((product) => {
     return {

@@ -22,7 +22,6 @@ export const Menu = ({ onProductAdd }) => {
   const dispatch = useDispatch();
   const [section, setSection] = useState(null);
 
-
   if (cates.isLoading === false && products.isLoading === false) {
 
     const addToOrder = (components) => {
@@ -64,7 +63,7 @@ export const Menu = ({ onProductAdd }) => {
             <TagCard
               onClick={() => setSection(category.id)}
               selected={category.id === section}
-              key={uuidv4()}
+              key={category.id}
 
             >
               <p>{category.category}</p>

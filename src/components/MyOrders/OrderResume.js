@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { formatPrice } from '../../utils/formatPrice';
 import { CustomButton } from '../UI';
@@ -18,31 +17,20 @@ import {
   Container,
   TitleContainerStyled,
   VolverButtonStyled,
-  StatusContainerStyled,
-  Status,
 } from './OrderResumeElements';
-import { useGetOrdersByOrderId, useGetProducts, useOrdersById } from '../../hooks/useCategories';
-import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useGetOrdersByOrderId, useOrdersById } from '../../hooks/useCategories';
 import { Spinner } from '@chakra-ui/react';
 import { useProducts } from '../../hooks/useProducts';
-import { useAxios } from '../../context/AxiosContext';
-import { useAuth } from '../../context/AuthContext';
-import { authData } from '../../utils/authData';
 
 
 export const OrderResume = () => {
   let { orderId } = useParams();
-  const { currentUser } = useAuth();
-  const axios = useAxios();
   const { data: ordersId } = useOrdersById();
   const { data: orders, isLoading } = useGetOrdersByOrderId(orderId);
-  /*   const { isLoading } = useQuery([useGetOrdersByOrderId(orderId)]); */
   const { data: products } = useProducts();
 
   const hola = async () => {
     if (products && orders) {
-
       await orders.map(order => {
         const product = products.find(product => product.id === order.productsId);
         if (product) {
@@ -53,38 +41,17 @@ export const OrderResume = () => {
       });
     }
   };
-
-  console.log(authData);
-  console.log(orders);
-  console.log(currentUser);
-  /*   const [orders1, setOrders1] = useState(null);
-    const [products1, setProducts1] = useState(null);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const [ordersResponse1, productsResponse1] = await Promise.all([
-            axios.get(`orders/${orderId}/order-items`),
-            axios.get('products')
-          ]);
-          setOrders1(ordersResponse1.data);
-          setProducts1(productsResponse1.data.data.result);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      fetchData();
-    }, []);
-    console.log(orders1);
-    console.log(products1); */
-
-
   hola();
-  console.log(orders);
-  let [orderFilter] = ordersId.filter(order => (order.id === Number(orderId)));
-  /*   console.log(orderFilter); */
-  return (
+  if (!ordersId) {
+    return <p>Espere</p>;
+  }
 
+  const filteredOrders = ordersId.filter(order => order.id === Number(orderId))[0];
+  console.log(filteredOrders);
+  if (!filteredOrders) {
+    return <p>espere</p>;
+  }
+  return (
     <Container>
       {isLoading ?
         <>
@@ -98,9 +65,7 @@ export const OrderResume = () => {
             </VolverButtonStyled>
             <TitleContainerStyled>
               <h3>Resumen</h3>
-
             </TitleContainerStyled>
-
           </HeaderResume>
 
           <ProductResume>
@@ -125,20 +90,19 @@ export const OrderResume = () => {
             <ProductUl>
               <CostLi>
                 <span>Costo de los productos</span>
-                <span>{formatPrice(orderFilter.subtotal)}</span>
+                <span>{formatPrice(filteredOrders.subtotal)}</span>
               </CostLi>
               <CostLi>
                 <span>Costo de envío</span>
-                <span>{formatPrice(orderFilter.shippingPrice)}</span>
+                <span>{formatPrice(filteredOrders.shippingPrice)}</span>
               </CostLi>
               <CostLi>
                 <strong>Total</strong>
-                <strong>{formatPrice(orderFilter.total)}</strong>
+                <strong>{formatPrice(filteredOrders.total)}</strong>
               </CostLi>
             </ProductUl>
           </CostResume>
         </OrderHistory>}
-
     </Container>
   );
 };

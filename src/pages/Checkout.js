@@ -6,10 +6,10 @@ import { Wrapper, LayoutPage } from '../components/UI';
 
 import { authData } from '../utils/authData';
 import { useAuth } from '../context/AuthContext';
-
+import CheckoutImg from '../assets/img/checkoutBg.jpg';
 
 const Checkout = () => {
-  const { isAuthenticated, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
 
@@ -17,10 +17,10 @@ const Checkout = () => {
     if (!authData && !currentUser) {
       navigate('/login');
     }
-  }, [navigate, currentUser]);
+  }, [authData, currentUser]);
   console.log(authData);
   return (
-    <LayoutPage>
+    <LayoutPage img={CheckoutImg}>
       <Wrapper>
         <CheckoutForm></CheckoutForm>
       </Wrapper>

@@ -9,6 +9,7 @@ export const ComponentGrid = styled.div`
   text-align: center;
   justify-items: center;
   gap: 20px;
+  
   padding: 50px;
   ${below.xlarge`
     grid-template-columns:1fr 1fr;
@@ -22,7 +23,7 @@ export const Component = styled.div`
   max-height: 300px;
   height: 300px;
   background-image: ${({ img }) => `url(${img})`};
-  background-position: center 20px;
+  background-position: center 0px;
   background-size: cover;
   background-repeat: no-repeat;
   filter: contrast(75%);
@@ -37,6 +38,7 @@ export const Component = styled.div`
   transition-property: box-shadow margin-top;
   transition-duration: 0.1s;
   box-shadow: 0px 0px 2px 0px grey;
+  border-radius: 5px;
   &:hover {
     cursor: default;
     filter: contrast(100%);
@@ -54,7 +56,8 @@ export const Component = styled.div`
 `;
 
 export const ComponentsStyled = styled.div`
-  height: 200px;
+  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding-top: 10rem;
   display: flex;
@@ -62,9 +65,12 @@ export const ComponentsStyled = styled.div`
   align-items: center;
   z-index: 3;
   user-select: none;
-  & h3 {
+  background-color: #eee;
+  h2 {
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
+    font-weight: 700;
+    border-bottom: 2px solid black;
   }
   ${below.small`
     margin: 0;

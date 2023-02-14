@@ -40,7 +40,6 @@ export const Order = () => {
     dispatch(cartActions.toggleCartHidden());
   };
 
-  console.log(authData, currentUser);
   return (
     <>
       {hidden && <DialogShadow onClick={handleToggleCart} />}

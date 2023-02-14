@@ -5,7 +5,7 @@ export const FormStyled = styled.form`
   max-width: 600px;
   z-index: 10;
   justify-self: center;
-  
+  background-image: url('../../assets/img/checkoutBg.jpg');
   display: flex;
   justify-content: center;
   align-items: center;

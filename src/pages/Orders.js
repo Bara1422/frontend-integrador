@@ -1,5 +1,5 @@
 import { Spinner } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+
 import { useEffect } from "react";
 import { MyOrders } from "../components/MyOrders/MyOrders";
 import { LayoutPage, Wrapper } from "../components/UI";
@@ -7,10 +7,11 @@ import { useAuth } from "../context/AuthContext";
 import { useOrdersById } from "../hooks/useCategories";
 import { useNavigate } from "react-router-dom";
 import { authData } from "../utils/authData";
+import OrdersBackground from '../assets/img/pc-escritorio.jpg';
 
 const Orders = () => {
   const { currentUser, authCheckState } = useAuth();
-  const { data: ordersId, isLoading, refetch } = useOrdersById();
+  const { data: ordersId, isLoading } = useOrdersById();
 
   const navigate = useNavigate();
   console.log(ordersId);
@@ -27,7 +28,7 @@ const Orders = () => {
   }, [authCheckState]);
 
   return (
-    <LayoutPage>
+    <LayoutPage img={OrdersBackground}>
       <Wrapper>
         {isLoading ? (<Spinner></Spinner>) : (
           <MyOrders orders={ordersId} />

@@ -17,15 +17,13 @@ import {
   StatusContainerStyled,
 } from './MyOrdersElements';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { authData } from '../../utils/authData';
 
 export const MyOrders = ({ orders }) => {
   const { currentUser, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [currentOrderId, setCurrentOrderId] = useState(null);
-  const currentid = currentOrderId;
 
   useEffect(() => {
     if (!authData && !currentUser) {

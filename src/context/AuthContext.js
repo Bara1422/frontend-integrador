@@ -136,7 +136,6 @@ function useProvideAuth() {
     console.log(authData);
     if (!authData?.token) {
       logout();
-      console.log(authData);
     } else {
 
       const expirationDate = new Date(
@@ -146,10 +145,8 @@ function useProvideAuth() {
         checkAuthTimeout(
           (expirationDate.getTime() - new Date().getTime())
         );
-        console.log(authData);
         setIsAuthenticated(true);
         setCurrentUser(authData);
-        console.log(currentUser);
       } else {
         logout();
       }

@@ -6,26 +6,20 @@ import { AboutAs } from '../components/AboutAs/AboutAs';
 import Contact from '../components/Contact/Contact';
 import Footer from '../components/Footer/Footer';
 import { useAuth } from '../context/AuthContext';
-import { authData } from '../utils/authData';
 
 const Home = () => {
-  const { currentUser, isAuthenticated, authCheckState } = useAuth();
-  console.log(currentUser);
-  console.log(authData);
-  console.log(isAuthenticated);
+  const { isAuthenticated, authCheckState } = useAuth();
 
   useEffect(() => {
-    console.log(currentUser);
     authCheckState();
-    console.log(authData);
-    console.log(isAuthenticated);
-  }, [isAuthenticated]);
+  }, [isAuthenticated, authCheckState]);
+
   return (
     <>
       <Navbar />
       <Banner>
-        <h2>Los mejores componentes del mercado</h2>
-        <p>Al mejor PRECIO</p>
+        <h2>LOS MEJORES COMPONENTES</h2>
+        <p>AL MEJOR PRECIO</p>
       </Banner>
       <NavbarLinks />
       <AboutAs />
