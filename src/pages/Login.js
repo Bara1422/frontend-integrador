@@ -7,13 +7,14 @@ import { Input, Spinner } from '@chakra-ui/react';
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import LoginBg from '../assets/img/loginBg1.jpeg';
+import { authData } from "../utils/authData";
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const { loading, login, signin, authCheckState, isAuthenticated } = useAuth();
+  const { loading, login, signin, currentUser } = useAuth();
   const navigate = useNavigate();
 
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -61,15 +62,12 @@ const Login = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
-  useEffect(() => {
-    authCheckState();
-  }, [isAuthenticated, authCheckState]);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (currentUser || authData) {
       navigate('/');
     }
-  }, [isAuthenticated, navigate]);
+  }, [currentUser, navigate]);
   return (
     <LayoutPage img={LoginBg}>
       <Wrapper>

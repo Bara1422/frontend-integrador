@@ -10,6 +10,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AxiosProvider } from './context/AxiosContext';
 import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +28,11 @@ root.render(
       <PersistGate persistor={persistor}>
         <QueryClientProvider client={queryClient}>
           <ChakraProvider>
-            <App />
+            <Router>
+              <AuthProvider>
+                <App />
+              </AuthProvider>
+            </Router>
           </ChakraProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

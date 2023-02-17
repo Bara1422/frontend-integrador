@@ -1,4 +1,4 @@
-
+/* 
 import { onSnapshot, addDoc, collection } from 'firebase/firestore';
 import { db, getOrders } from '../../firebase/firebase.utils2';
 
@@ -86,4 +86,4 @@ export const fetchOrders = (userId) => {
       dispatch(fetchOrderFail(error));
     }
   };
-};
+}; */

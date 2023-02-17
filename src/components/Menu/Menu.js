@@ -12,7 +12,6 @@ import { formatPrice } from '../../utils/formatPrice';
 import { useDispatch } from 'react-redux';
 import * as cartActions from '../../redux/cart/cart-actions';
 import toast, { Toaster } from 'react-hot-toast';
-import { v4 as uuidv4 } from 'uuid';
 import { useCategories } from '../../hooks/useCategories';
 import { useProducts } from '../../hooks/useProducts';
 
@@ -21,6 +20,7 @@ export const Menu = ({ onProductAdd }) => {
   let products = useProducts();
   const dispatch = useDispatch();
   const [section, setSection] = useState(null);
+
 
   if (cates.isLoading === false && products.isLoading === false) {
 
@@ -74,9 +74,9 @@ export const Menu = ({ onProductAdd }) => {
           {
             Object.entries(Products).map(([sectionName, components]) => {
               return (
-                <>
+                <React.Fragment key={`${sectionName}-${components[0].category}`}>
                   {components.map((components) => (
-                    <ComponentCard key={components.id}>
+                    <ComponentCard key={`${sectionName}-${components.id}`}>
                       <Component img={components.imgUrl} >
                         <h5>{components.name}</h5>
                         <p>{formatPrice(components.price)}</p>
@@ -84,7 +84,7 @@ export const Menu = ({ onProductAdd }) => {
                       </Component>
                     </ComponentCard>
                   ))}
-                </>
+                </React.Fragment>
               );
             })
           }

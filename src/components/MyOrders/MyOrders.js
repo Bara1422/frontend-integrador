@@ -22,7 +22,7 @@ import { useAuth } from '../../context/AuthContext';
 import { authData } from '../../utils/authData';
 
 export const MyOrders = ({ orders }) => {
-  const { currentUser, isAuthenticated } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,9 +30,7 @@ export const MyOrders = ({ orders }) => {
       navigate('/login');
     }
   }, [currentUser, navigate]);
-  console.log(authData);
-  console.log(isAuthenticated);
-  console.log(currentUser);
+ 
   return (
 
     <Container>

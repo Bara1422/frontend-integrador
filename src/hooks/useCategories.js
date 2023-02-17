@@ -1,14 +1,14 @@
 import { useAxios } from "../context/AxiosContext";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+
 import { useMemo } from "react";
 
 export const useCategories = () => {
   const axios = useAxios();
   return useQuery(['categories'], async () => {
     const { data } = await axios.get('category');
-    console.log(data);
+  
     return data.data.result;
   });
 };
@@ -17,14 +17,13 @@ export const useOrdersById = () => {
   const stringData = localStorage.getItem('authData');
   const authData = JSON.parse(stringData);
   const axios = useAxios();
-  const { currentUser } = useAuth();
   const [error, setError] = useState(null);
   const [ordersState, setOrdersState] = useState(null);
   return useQuery(['orderss', authData.userId], async () => {
     try {
       const { data } = await axios.get('orders');
       const orders = await data.data.result;
-      console.log(data);
+      
       setOrdersState(orders);
       const filteredOrders = await orders.filter(order => order.userId === authData.userId);
       const ordersEnd = filteredOrders.map(order => {
@@ -36,7 +35,7 @@ export const useOrdersById = () => {
           updatedAt: newUpdatedAt,
         };
       });
-      console.log(ordersEnd);
+     
       return ordersEnd;
     } catch (e) {
       setError(e.message);
@@ -52,7 +51,7 @@ export const useGetOrderById = (orderId) => {
       return null;
     }
     const filteredOrder = ordersEnd.filter((order) => order.id === orderId);
-    console.log(filteredOrder);
+    
     return filteredOrder;
   }, [ordersEnd, orderId]);
 };

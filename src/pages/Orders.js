@@ -10,12 +10,10 @@ import { authData } from "../utils/authData";
 import OrdersBackground from '../assets/img/pc-escritorio.jpg';
 
 const Orders = () => {
-  const { currentUser, authCheckState } = useAuth();
+  const { currentUser } = useAuth();
   const { data: ordersId, isLoading } = useOrdersById();
 
   const navigate = useNavigate();
-  console.log(ordersId);
-  console.log(currentUser, authData);
 
   useEffect(() => {
     if (!currentUser && !authData) {
@@ -23,9 +21,6 @@ const Orders = () => {
     }
   }, [navigate, currentUser]);
 
-  useEffect(() => {
-    authCheckState();
-  }, [authCheckState]);
 
   return (
     <LayoutPage img={OrdersBackground}>

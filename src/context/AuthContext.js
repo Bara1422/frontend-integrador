@@ -9,7 +9,6 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAxios } from '../context/AxiosContext';
-import { useEffect } from 'react';
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -72,7 +71,7 @@ function useProvideAuth() {
         const expirationDate = new Date(
           new Date().getTime() + response.data.result.expiresIn
         ).getTime();
-        console.log(response);
+
         localStorage.setItem('authData', JSON.stringify(response.data.result));
         localStorage.setItem('expirationDate', expirationDate.toString());
         setIsAuthenticated(true);
@@ -93,9 +92,7 @@ function useProvideAuth() {
     [checkAuthTimeout, history, axios]
   );
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+
 
   const signin = useCallback(
     async (name, email, password) => {
@@ -152,10 +149,6 @@ function useProvideAuth() {
     }
   }, [logout, checkAuthTimeout]);
 
-  useEffect(() => {
-    authCheckState();
-  }, [isAuthenticated]);
-
   return useMemo(() => {
     return {
       currentUser,
@@ -167,7 +160,8 @@ function useProvideAuth() {
       signin,
       authCheckState,
       setCurrentUser,
-      isAuthenticated
+      isAuthenticated,
+     
     };
   }, [
     currentUser,
@@ -179,6 +173,7 @@ function useProvideAuth() {
     signin,
     authCheckState,
     setCurrentUser,
-    isAuthenticated
+    isAuthenticated,
+    
   ]);
 }

@@ -83,7 +83,7 @@ export const DialogShadow = styled.div`
   height: calc(100%);
   width: 100%;
   background-color: #000000e6;
-  z-index: 4;
+  z-index: 11;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -10,7 +10,7 @@ import * as userActions from '../../redux/user/user-actions';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useAuth } from '../../context/AuthContext';
-import { authData } from '../../utils/authData';
+
 
 export const Navbar = ({ shake }) => {
   const { currentUser, isAuthenticated, authCheckState } = useAuth();
@@ -42,7 +42,7 @@ export const Navbar = ({ shake }) => {
         {currentUser && isAuthenticated ? (
           <>
             <AccountCircleIcon sx={{ fontSize: 26 }} style={{ cursor: 'pointer' }} onClick={handleToggle} data-aos='fade-left' />
-            <UserMenu user={currentUser} />
+            <UserMenu />
           </>
         ) : (
           <LinkStyled to='/login'>

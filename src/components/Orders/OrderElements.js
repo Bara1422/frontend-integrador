@@ -9,7 +9,7 @@ export const OrderStyled = styled.div`
   width: 300px;
   background-color: #fff;
   height: calc(100% - 93px);
-  z-index: 10;
+  z-index: 11;
   box-shadow: 4px 0px 5px 4px grey;
   display: flex;
   flex-direction: column;

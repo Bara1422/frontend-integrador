@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { formatPrice } from '../../utils/formatPrice';
 import { CustomButton } from '../UI';
-import { v4 as uuidv4 } from 'uuid';
 import {
   HeaderResume,
   ProductResume,
@@ -20,6 +19,7 @@ import {
 } from './OrderResumeElements';
 import { useGetOrdersByOrderId, useOrdersById } from '../../hooks/useCategories';
 import { Spinner } from '@chakra-ui/react';
+import { Spinner as Spiner } from '../UI';
 import { useProducts } from '../../hooks/useProducts';
 
 
@@ -29,7 +29,7 @@ export const OrderResume = () => {
   const { data: orders, isLoading } = useGetOrdersByOrderId(orderId);
   const { data: products } = useProducts();
 
-  const hola = async () => {
+  const filterProductsById = async () => {
     if (products && orders) {
       await orders.map(order => {
         const product = products.find(product => product.id === order.productsId);
@@ -41,22 +41,21 @@ export const OrderResume = () => {
       });
     }
   };
-  hola();
+  filterProductsById();
   if (!ordersId) {
-    return <p>Espere</p>;
+    return <Spinner />;
   }
 
   const filteredOrders = ordersId.filter(order => order.id === Number(orderId))[0];
-  console.log(filteredOrders);
+
   if (!filteredOrders) {
-    return <p>espere</p>;
+    return <Spinner />;
   }
   return (
     <Container>
       {isLoading ?
         <>
-          <p>Estamos trayendo la orden de la base datos, aguarde....</p>
-          <Spinner />
+          <Spiner />
         </>
         : <OrderHistory>
           <HeaderResume>
@@ -72,7 +71,7 @@ export const OrderResume = () => {
             <h3>Productos</h3>
             <ProductUl>
               {orders.map(item => (
-                <ProductLi key={uuidv4()}>
+                <ProductLi key={item.id}>
                   <ItemImg img={item.imgUrl} />
                   <InfoProducts>
                     <p>{item.title}</p>

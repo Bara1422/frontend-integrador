@@ -12,13 +12,12 @@ const Checkout = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    if (!authData && !currentUser) {
+    if (!currentUser && !authData) {
       navigate('/login');
     }
-  }, [authData, currentUser]);
-  console.log(authData);
+  }, [navigate, currentUser]);
+
   return (
     <LayoutPage img={CheckoutImg}>
       <Wrapper>
