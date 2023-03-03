@@ -4,8 +4,6 @@ import { Menu } from '../components/Menu/Menu';
 import { Navbar } from '../components/Navbar/Navbar';
 
 export const Products = () => {
-
-
   const [shake, setShake] = useState(false);
   const hanldeProductAdd = () => {
     setShake(true);
@@ -19,5 +17,4 @@ export const Products = () => {
       <Menu onProductAdd={hanldeProductAdd} />
     </>
   );
-}
-
+};

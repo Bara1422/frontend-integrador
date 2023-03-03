@@ -17,8 +17,8 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 100,
-    }
-  }
+    },
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -40,5 +40,3 @@ root.render(
     </Provider>
   </AxiosProvider>
 );
-
-

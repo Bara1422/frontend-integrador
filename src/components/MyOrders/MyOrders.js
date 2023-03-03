@@ -30,40 +30,35 @@ export const MyOrders = ({ orders }) => {
       navigate('/login');
     }
   }, [currentUser, navigate]);
- 
-  return (
 
+  return (
     <Container>
       <OrderHistory>
         <Wrapper>
           <OrderTitle>
             <h2>Mis últimos pedidos</h2>
-            <p>
-              Haz seguimiento de tus pedidos anteriores
-            </p>
+            <p>Haz seguimiento de tus pedidos anteriores</p>
           </OrderTitle>
           <div>
-
-            {orders.map(order => (
+            {orders.map((order) => (
               <OrderContent key={uuidv4()}>
-
                 <OrderDetails>
-                  <OrderUl >
-                    <OrderLi >
+                  <OrderUl>
+                    <OrderLi>
                       <OrderSpan>Fecha:</OrderSpan>
                       {order.createdAt}
                     </OrderLi>
                     <OrderLi>
                       <OrderSpan>Total:</OrderSpan>
                       {formatPrice(order.total)}
-                    </OrderLi >
+                    </OrderLi>
                   </OrderUl>
                   <StatusContainerStyled>
                     <Status type={order.statusId}>'pending'</Status>
                   </StatusContainerStyled>
                   <Flex>
                     <Link to={`${order.id}/order-items`}>
-                      <CustomButton w='150px' m='0'>
+                      <CustomButton w="150px" m="0">
                         Ver resumen
                       </CustomButton>
                     </Link>
@@ -74,7 +69,6 @@ export const MyOrders = ({ orders }) => {
           </div>
         </Wrapper>
       </OrderHistory>
-
-    </Container >
+    </Container>
   );
 };

@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { NavbarStyled } from './NavbarLinksElements';
 import { Link as LinkScroll } from 'react-scroll';
 
-
 export const NavbarLinks = () => {
   return (
     <div>
-      <NavbarStyled id='about'>
+      <NavbarStyled id="about">
         <ul>
           <li>
             <LinkScroll
@@ -17,10 +16,12 @@ export const NavbarLinks = () => {
               smooth={true}
               duration={500}
               style={{ cursor: 'pointer' }}
-            >Nosotros</LinkScroll>
+            >
+              Nosotros
+            </LinkScroll>
           </li>
           <li>
-            <Link to='/products'>Productos</Link>
+            <Link to="/products">Productos</Link>
           </li>
           <li>
             <LinkScroll
@@ -30,11 +31,12 @@ export const NavbarLinks = () => {
               smooth={true}
               duration={500}
               style={{ cursor: 'pointer' }}
-            >Contacto</LinkScroll>
+            >
+              Contacto
+            </LinkScroll>
           </li>
         </ul>
-
       </NavbarStyled>
-    </div >
+    </div>
   );
 };

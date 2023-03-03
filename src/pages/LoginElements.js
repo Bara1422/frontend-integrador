@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { CustomButton } from "../components/UI";
+import styled from 'styled-components';
+import { CustomButton } from '../components/UI';
 
 export const Containerbuttons = styled.div`
   display: flex;
@@ -22,4 +22,3 @@ export const ALink = styled.a`
     text-decoration: underline;
   }
 `;
-

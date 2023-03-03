@@ -4,13 +4,13 @@ export const LOGOUT = 'LOGOUT';
 
 export const setCurrentUser = (user) => ({
   type: SET_CURRENT_USER,
-  payload: user
+  payload: user,
 });
 
 export const toggleMenuHidden = () => ({
-  type: TOGGLE_MENU_HIDDEN
+  type: TOGGLE_MENU_HIDDEN,
 });
 
 export const logout = () => ({
-  type: LOGOUT
+  type: LOGOUT,
 });

@@ -5,7 +5,7 @@ export const status = (type) => {
   switch (type) {
     case 'Realizado':
       return css`
-        color:  ${theme.success};
+        color: ${theme.success};
         background-color: ${theme.bgSuccess};
       `;
     case 'Pendiente':

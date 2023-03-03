@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useAxios } from "../context/AxiosContext";
-
+import { useState } from 'react';
+import { useAxios } from '../context/AxiosContext';
 
 export const useCreateOrder = () => {
   const [initPoint, setInitPoint] = useState('');
@@ -12,7 +11,7 @@ export const useCreateOrder = () => {
         userId: userId,
         shippingDetails: {
           domicilio: domicilio,
-          localidad: localidad
+          localidad: localidad,
         },
         items: items,
         shippingPrice: 250,
@@ -20,7 +19,7 @@ export const useCreateOrder = () => {
         total: subtotal + 250,
       });
       const { data: respuesta } = response;
-     
+
       setInitPoint(respuesta.data.result.init_point);
 
       setOla(response);

@@ -87,7 +87,7 @@ export const OrderLi = styled.p`
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  
+
   zoom: 1;
   line-height: 1.7;
   text-overflow: ellipsis;

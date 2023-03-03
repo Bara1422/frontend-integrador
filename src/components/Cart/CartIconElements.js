@@ -18,21 +18,18 @@ export const CartIconContainer = styled.div`
   ${({ shake }) =>
     shake &&
     css`
-    animation: ${CartIconShake} 1s infinite ease;
+      animation: ${CartIconShake} 1s infinite ease;
     `}
 `;
 
 export const CartIconStyled = styled(ShoppingBagIcon)`
   width: 45px;
   height: 45px;
- 
-  
 `;
 
 export const ItemCount = styled.div`
-  
   border-radius: 50%;
-  
+
   font-size: 12px;
   font-weight: bold;
   width: 20px;

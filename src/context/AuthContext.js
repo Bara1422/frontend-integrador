@@ -16,9 +16,9 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   isAuthenticated: false,
-  login: (email, password) => { },
-  logout: () => { },
-  authCheckState: () => { },
+  login: (email, password) => {},
+  logout: () => {},
+  authCheckState: () => {},
 };
 
 const authContext = createContext(INITIAL_STATE);
@@ -38,7 +38,7 @@ function useProvideAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [hiddenMenu, setHiddenMenu] = useState(true);
+  const [hiddenMenu] = useState(true);
   const [error, setError] = useState(null);
 
   const logout = useCallback(() => {
@@ -84,15 +84,16 @@ function useProvideAuth() {
         console.log(error);
         setLoading(false);
         let err = error;
-        let errorRes = err.response?.data ? err.response?.data : null;
+        console.log(err);
+        let errorRes = err.response?.data.errors
+          ? err.response?.data.errors
+          : null;
 
         setError(errorRes);
       }
     },
     [checkAuthTimeout, history, axios]
   );
-
-
 
   const signin = useCallback(
     async (name, email, password) => {
@@ -119,7 +120,9 @@ function useProvideAuth() {
         console.log(error);
         setLoading(false);
         let err = error;
-        let errorRes = err.response?.data ? err.response?.data : null;
+        let errorRes = err.response?.data.errors
+          ? err.response?.data.errors
+          : null;
 
         setError(errorRes);
       }
@@ -133,14 +136,11 @@ function useProvideAuth() {
     if (!authData?.token) {
       logout();
     } else {
-
       const expirationDate = new Date(
         parseInt(localStorage.getItem('expirationDate'))
       );
       if (expirationDate.getTime() > new Date().getTime()) {
-        checkAuthTimeout(
-          (expirationDate.getTime() - new Date().getTime())
-        );
+        checkAuthTimeout(expirationDate.getTime() - new Date().getTime());
         setIsAuthenticated(true);
         setCurrentUser(authData);
       } else {
@@ -161,7 +161,6 @@ function useProvideAuth() {
       authCheckState,
       setCurrentUser,
       isAuthenticated,
-     
     };
   }, [
     currentUser,
@@ -174,6 +173,5 @@ function useProvideAuth() {
     authCheckState,
     setCurrentUser,
     isAuthenticated,
-    
   ]);
 }

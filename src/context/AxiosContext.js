@@ -9,19 +9,22 @@ export function AxiosProvider({ children }) {
       baseURL: `${process.env.REACT_APP_API_BASE_URL}`,
       headers: {
         'Content-Type': 'application/json',
-      }
-    }
-    );
+      },
+    });
     // INTERCEPTOR
-    axios.interceptors.request.use((config) => {
-      const data = localStorage.getItem('authData') || null;
-      const authData = data ? JSON.parse(data) : null;
-      if (authData?.token) {
-        config.headers.Authorization = `Bearer ${authData.token}`;
+    axios.interceptors.request.use(
+      (config) => {
+        const data = localStorage.getItem('authData') || null;
+        const authData = data ? JSON.parse(data) : null;
+        if (authData?.token) {
+          config.headers.Authorization = `Bearer ${authData.token}`;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
       }
-      return config;
-    },
-      error => { return Promise.reject(error); });
+    );
     return axios;
   }, []);
 

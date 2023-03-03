@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { below } from "../../Styles/utilities";
+import styled from 'styled-components';
+import { below } from '../../Styles/utilities';
 
 export const NavbarStyled = styled.div`
   padding: 10px;
@@ -20,7 +20,7 @@ export const NavbarStyled = styled.div`
     justify-content: space-around;
     font-size: 3rem;
     height: auto;
-  ${below.large`
+    ${below.large`
     display: block;
     text-align: center;
     padding-top: 2rem;
@@ -37,9 +37,8 @@ export const NavbarStyled = styled.div`
   a {
     color: #fff;
     &:hover {
-      color: #BC02CB;
+      color: #bc02cb;
       transition: 0.5s;
     }
   }
-  
 `;

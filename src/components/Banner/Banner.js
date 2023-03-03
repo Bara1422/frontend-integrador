@@ -1,7 +1,5 @@
-import styled from "styled-components";
-import BannerBg from '../../assets/img/bannerBg.png';
-import { below } from "../../Styles/utilities";
-
+import styled from 'styled-components';
+import { below } from '../../Styles/utilities';
 
 export const Banner = styled.div`
   max-height: 80vh;

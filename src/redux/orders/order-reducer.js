@@ -1,5 +1,12 @@
-import { CREATE_ORDER_FAIL, CREATE_ORDER_SUCCESS, START_ORDER, PURCHASE_INIT, FETCH_ORDERS_START, FETCH_ORDERS_SUCCESS, FETCH_ORDERS_FAIL } from './order-actions';
-
+import {
+  CREATE_ORDER_FAIL,
+  CREATE_ORDER_SUCCESS,
+  START_ORDER,
+  PURCHASE_INIT,
+  FETCH_ORDERS_START,
+  FETCH_ORDERS_SUCCESS,
+  FETCH_ORDERS_FAIL,
+} from './order-actions';
 
 const INITIAL_STATE = {
   orders: [],
@@ -22,7 +29,7 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         purchased: true,
-        orders: [...state.orders, { ...action.orderData }]
+        orders: [...state.orders, { ...action.orderData }],
       };
     case CREATE_ORDER_FAIL:
       return {
@@ -55,6 +62,6 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
       };
     default:
       return state;
-  };
+  }
 };
 export default ordersReducer;

@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { MenuOptionElement, MenuOptions, UserMenuStyled, WelcomeTitle, Shadow } from './UserMenuElements';
+import {
+  MenuOptionElement,
+  MenuOptions,
+  UserMenuStyled,
+  WelcomeTitle,
+  Shadow,
+} from './UserMenuElements';
 
 import * as userActions from '../../redux/user/user-actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,9 +15,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useAuth } from '../../context/AuthContext';
 
-
 export const UserMenu = () => {
-  const { hiddenMenu } = useSelector(state => state.user);
+  const { hiddenMenu } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { logout, currentUser } = useAuth();
   const navigate = useNavigate();
@@ -23,7 +28,6 @@ export const UserMenu = () => {
     dispatch(userActions.toggleMenuHidden());
   };
 
-
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -32,18 +36,19 @@ export const UserMenu = () => {
   return (
     <>
       {!hiddenMenu && <Shadow onClick={handleToggle} />}
-      {
-        (!hiddenMenu) ? (<UserMenuStyled data-aos='fade-right' >
-          <WelcomeTitle >Hola {currentUser.name}</WelcomeTitle>
+      {!hiddenMenu ? (
+        <UserMenuStyled data-aos="fade-right">
+          <WelcomeTitle>Hola {currentUser.name}</WelcomeTitle>
           <MenuOptions>
-            <Link to='/mis-ordenes' onClick={handleToggle}>
-              <MenuOptionElement >Mís ordenes</MenuOptionElement>
+            <Link to="/mis-ordenes" onClick={handleToggle}>
+              <MenuOptionElement>Mís ordenes</MenuOptionElement>
             </Link>
-            <MenuOptionElement onClick={handleLogout}>Cerrar Sesión</MenuOptionElement>
+            <MenuOptionElement onClick={handleLogout}>
+              Cerrar Sesión
+            </MenuOptionElement>
           </MenuOptions>
-        </UserMenuStyled>) : null
-      }
+        </UserMenuStyled>
+      ) : null}
     </>
-
   );
 };

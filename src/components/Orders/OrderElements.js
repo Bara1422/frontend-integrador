@@ -1,6 +1,9 @@
-import styled, { css } from "styled-components";
-import { below } from "../../Styles/utilities";
-import { ConfirmButton, DialogContent } from '../ComponentDialog/ComponentDialogElements';
+import styled, { css } from 'styled-components';
+import { below } from '../../Styles/utilities';
+import {
+  ConfirmButton,
+  DialogContent,
+} from '../ComponentDialog/ComponentDialogElements';
 
 export const OrderStyled = styled.div`
   position: fixed;
@@ -13,7 +16,7 @@ export const OrderStyled = styled.div`
   box-shadow: 4px 0px 5px 4px grey;
   display: flex;
   flex-direction: column;
-  transform: ${({ show }) => show ? 'translateX(0)' : 'translateX(100%)'};
+  transform: ${({ show }) => (show ? 'translateX(0)' : 'translateX(100%)')};
   transition-property: transform;
   transition-duration: 0.5s;
   ${below.small`
@@ -27,7 +30,6 @@ export const OrderContent = styled(DialogContent)`
   max-height: 100%;
   height: 100%;
   align-items: flex-start;
- 
 `;
 
 export const OrderContainer = styled.div`
@@ -44,8 +46,8 @@ export const OrderItem = styled.div`
   display: grid;
   grid-template-columns: 50px 100px 100px;
   justify-content: space-between;
-  div{
-    p{
+  div {
+    p {
       color: green;
       font-weight: bold;
     }
@@ -76,5 +78,5 @@ export const ClearCartButton = styled(ConfirmButton)`
       border: 0px rgb(184, 182, 182) solid;
       cursor: not-allowed !important;
       transition: 0.5s ease-out;
-`}
+    `}
 `;

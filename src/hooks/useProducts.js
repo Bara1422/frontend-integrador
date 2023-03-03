@@ -1,5 +1,5 @@
-import { useAxios } from "../context/AxiosContext";
-import { useQuery } from "@tanstack/react-query";
+import { useAxios } from '../context/AxiosContext';
+import { useQuery } from '@tanstack/react-query';
 
 export const useProducts = () => {
   const axios = useAxios();
@@ -8,4 +8,3 @@ export const useProducts = () => {
     return products.data.result;
   });
 };
-

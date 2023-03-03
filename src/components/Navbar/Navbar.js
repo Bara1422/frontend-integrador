@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { NavbarStyled, Logo, LinkStyled, NavigationMenu, Divider, LoginButton } from './NavbarElements';
+import {
+  NavbarStyled,
+  Logo,
+  LinkStyled,
+  NavigationMenu,
+  Divider,
+  LoginButton,
+} from './NavbarElements';
 import img_Logo from '../../assets/img/Computer_n_screen.svg.png';
 import { CartIcon } from '../Cart/CartIcon';
 import { useDispatch } from 'react-redux';
@@ -10,7 +17,6 @@ import * as userActions from '../../redux/user/user-actions';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useAuth } from '../../context/AuthContext';
-
 
 export const Navbar = ({ shake }) => {
   const { currentUser, isAuthenticated, authCheckState } = useAuth();
@@ -30,9 +36,8 @@ export const Navbar = ({ shake }) => {
   }, [authCheckState]);
 
   return (
-
     <NavbarStyled>
-      <LinkStyled to='/' onClick={handleCart}>
+      <LinkStyled to="/" onClick={handleCart}>
         <Logo src={img_Logo} />
         <h2>Todo-Gaming</h2>
       </LinkStyled>
@@ -41,16 +46,19 @@ export const Navbar = ({ shake }) => {
         <Divider />
         {currentUser && isAuthenticated ? (
           <>
-            <AccountCircleIcon sx={{ fontSize: 26 }} style={{ cursor: 'pointer' }} onClick={handleToggle} data-aos='fade-left' />
+            <AccountCircleIcon
+              sx={{ fontSize: 26 }}
+              style={{ cursor: 'pointer' }}
+              onClick={handleToggle}
+              data-aos="fade-left"
+            />
             <UserMenu />
           </>
         ) : (
-          <LinkStyled to='/login'>
+          <LinkStyled to="/login">
             <LoginButton>Ingresar</LoginButton>
           </LinkStyled>
         )}
-
-
       </NavigationMenu>
     </NavbarStyled>
   );

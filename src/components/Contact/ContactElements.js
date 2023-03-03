@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { below } from "../../Styles/utilities";
+import styled from 'styled-components';
+import { below } from '../../Styles/utilities';
 
 export const FormContainerStyled = styled.div`
   padding: 2rem;
@@ -7,7 +7,7 @@ export const FormContainerStyled = styled.div`
   justify-content: center;
   background-image: url('img/fotoperfecta copy.jpg');
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
   background-position: center;
   ${below.large`
     background-position: left;
@@ -50,7 +50,7 @@ export const InputStyled = styled.input`
 `;
 
 export const TextAreaStyled = styled.textarea`
-   margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
   border-radius: 5px;
   padding-left: 10px;
   background-color: #000;
@@ -65,21 +65,21 @@ export const TextAreaStyled = styled.textarea`
 `;
 
 export const SubmitStyled = styled.button`
- border: 2px #fff solid;
-    width: 30%;
-    margin: 0 auto;
-    border-radius: 5px;
-    text-align: center;
-    
-    padding: 0.5rem;
-    background-color: #000;
-    color: #fff;
-    font-size: 1.1rem;
-    cursor: pointer;
-    ${below.small`
+  border: 2px #fff solid;
+  width: 30%;
+  margin: 0 auto;
+  border-radius: 5px;
+  text-align: center;
+
+  padding: 0.5rem;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  ${below.small`
       font-size: 0.8rem;
     `}
   &:hover {
-    color: #BC02CB;
-  };
+    color: #bc02cb;
+  } ;
 `;

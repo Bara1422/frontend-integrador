@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
-import useForm from "../hooks/useForm";
-import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../utils/validators';
-import { Wrapper, LayoutPage, FormStyled, FormContent, CustomButton } from '../components/UI';
-import { Containerbuttons, ALink } from "./LoginElements";
-import { Input, Spinner } from '@chakra-ui/react';
-import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from 'react';
+import useForm from '../hooks/useForm';
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
+} from '../utils/validators';
+import {
+  Wrapper,
+  LayoutPage,
+  FormStyled,
+  FormContent,
+  CustomButton,
+} from '../components/UI';
+import { Containerbuttons, ALink } from './LoginElements';
+import { Spinner } from '@chakra-ui/react';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import LoginBg from '../assets/img/loginBg1.jpeg';
-import { authData } from "../utils/authData";
-
+import { authData } from '../utils/authData';
+import { Input as InputUI } from '../components/UI';
+import { toast, Toaster } from 'react-hot-toast';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const { loading, login, signin, currentUser } = useAuth();
+  const { loading, login, signin, currentUser, error } = useAuth();
   const navigate = useNavigate();
 
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -62,72 +70,126 @@ const Login = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
-
   useEffect(() => {
     if (currentUser || authData) {
       navigate('/');
     }
   }, [currentUser, navigate]);
+
+  const [errorMessage, setErrorMessage] = useState(null);
+  console.log(errorMessage);
+  useEffect(() => {
+    if (error) {
+      toast.error(error[0]?.message, {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontWeight: '700',
+        },
+      });
+    }
+  }, [error]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (formState.inputs.email?.isValid && formState.inputs.password?.isValid) {
+      login(formState.inputs.email.value, formState.inputs.password.value)
+        .then(() => {
+          setErrorMessage('');
+        })
+        .catch((errorLogin) => {
+          setErrorMessage(errorLogin);
+        });
+    }
+  };
+  const handleSignin = (e) => {
+    e.preventDefault();
+    if (formState.inputs.email?.isValid && formState.inputs.password?.isValid) {
+      signin(
+        formState.inputs.nombre.value,
+        formState.inputs.email.value,
+        formState.inputs.password.value
+      )
+        .then(() => {
+          setErrorMessage('');
+        })
+        .catch((error) => {
+          setErrorMessage(error);
+          console.log(error);
+        });
+    }
+  };
+
+  console.log(error);
+  console.log(formState);
+  console.log(errorMessage);
   return (
     <LayoutPage img={LoginBg}>
       <Wrapper>
-        <form id='form'>
+        {error && <Toaster position="bottom-center" />}
+        <form id="form">
           <FormStyled>
             <FormContent>
               {!isLoginMode && (
                 <>
-                  <label style={{ display: "inline-block", margin: '10px 0px 5px', fontWeight: 500 }} htmlFor='nombre'>Nombre:</label>
-                  <Input
-                    id='nombre'
-                    type='text'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                  <InputUI
+                    id="nombre"
+                    label="Nombre:"
+                    type="text"
+                    onInput={inputHandler}
                     validators={[VALIDATOR_REQUIRE()]}
-                    errorText='Campo Obligatorio'
-                    placeholder='Ingrese su nombre'
+                    errorText="Campo Obligatorio"
+                    placeholder="Ingrese su nombre"
                   />
                 </>
-              )
-              }
-              <label style={{ display: "inline-block", margin: '10px 0px 5px', fontWeight: 500 }} htmlFor='email'>Email:</label>
-              <Input
-                id='email'
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              )}
+
+              <InputUI
+                id="email"
+                label="Email:"
+                type="email"
+                onInput={inputHandler}
                 validators={[VALIDATOR_EMAIL()]}
-                errorText='Ingrese un Email válido'
-                placeholder='Ingrese su email'
+                errorText="Ingrese un Email válido"
+                placeholder="Ingrese su email"
               />
-              <label style={{ display: "inline-block", margin: '10px 0px 5px', fontWeight: 500 }} htmlFor='password'>Password:</label>
-              <Input
-                id='password'
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+
+              <InputUI
+                id="password"
+                label="Password:"
+                type="password"
                 onInput={inputHandler}
                 validators={[VALIDATOR_MINLENGTH(8)]}
-                errorText='Campo Obligatorio'
-                placeholder='Ingrese su password'
+                errorText="Ingrese minimo 8 caracteres"
+                placeholder="Ingrese su password"
               />
             </FormContent>
 
             <Containerbuttons>
-              {isLoginMode
-                ? (<CustomButton onClick={(e) => [e.preventDefault(), login(email, password)]}> {loading ? <Spinner /> : 'Ingresar'}</CustomButton>)
-                : (<CustomButton onClick={(e) => [e.preventDefault(), signin(name, email, password)]}>{loading ? <Spinner /> : 'Registrarse'}</CustomButton>)
-              }
+              {isLoginMode ? (
+                <CustomButton onClick={handleLogin}>
+                  {loading ? <Spinner /> : 'Ingresar'}
+                </CustomButton>
+              ) : (
+                <CustomButton onClick={handleSignin}>
+                  {loading ? <Spinner /> : 'Registrarse'}
+                </CustomButton>
+              )}
             </Containerbuttons>
+
             <Containerbuttons>
               <span>
                 {!isLoginMode ? 'Ya tenes cuenta?' : 'Todavia no tenes cuenta?'}
               </span>
-              <ALink onClick={switchModeHandler}>{!isLoginMode ? 'Ingresar' : 'Registrate'}</ALink>
+              <ALink onClick={switchModeHandler}>
+                {!isLoginMode ? 'Ingresar' : 'Registrate'}
+              </ALink>
             </Containerbuttons>
           </FormStyled>
         </form>
       </Wrapper>
-    </LayoutPage >
+    </LayoutPage>
   );
 };
 

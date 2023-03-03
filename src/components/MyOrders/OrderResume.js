@@ -17,11 +17,13 @@ import {
   TitleContainerStyled,
   VolverButtonStyled,
 } from './OrderResumeElements';
-import { useGetOrdersByOrderId, useOrdersById } from '../../hooks/useCategories';
+import {
+  useGetOrdersByOrderId,
+  useOrdersById,
+} from '../../hooks/useCategories';
 import { Spinner } from '@chakra-ui/react';
 import { Spinner as Spiner } from '../UI';
 import { useProducts } from '../../hooks/useProducts';
-
 
 export const OrderResume = () => {
   let { orderId } = useParams();
@@ -31,8 +33,10 @@ export const OrderResume = () => {
 
   const filterProductsById = async () => {
     if (products && orders) {
-      await orders.map(order => {
-        const product = products.find(product => product.id === order.productsId);
+      await orders.map((order) => {
+        const product = products.find(
+          (product) => product.id === order.productsId
+        );
         if (product) {
           order.title = product.name;
           order.imgUrl = product.imgUrl;
@@ -46,21 +50,24 @@ export const OrderResume = () => {
     return <Spinner />;
   }
 
-  const filteredOrders = ordersId.filter(order => order.id === Number(orderId))[0];
+  const filteredOrders = ordersId.filter(
+    (order) => order.id === Number(orderId)
+  )[0];
 
   if (!filteredOrders) {
     return <Spinner />;
   }
   return (
     <Container>
-      {isLoading ?
+      {isLoading ? (
         <>
           <Spiner />
         </>
-        : <OrderHistory>
+      ) : (
+        <OrderHistory>
           <HeaderResume>
-            <VolverButtonStyled to='/mis-ordenes'>
-              <CustomButton w='70px'>Volver</CustomButton>
+            <VolverButtonStyled to="/mis-ordenes">
+              <CustomButton w="70px">Volver</CustomButton>
             </VolverButtonStyled>
             <TitleContainerStyled>
               <h3>Resumen</h3>
@@ -70,7 +77,7 @@ export const OrderResume = () => {
           <ProductResume>
             <h3>Productos</h3>
             <ProductUl>
-              {orders.map(item => (
+              {orders.map((item) => (
                 <ProductLi key={item.id}>
                   <ItemImg img={item.imgUrl} />
                   <InfoProducts>
@@ -101,7 +108,8 @@ export const OrderResume = () => {
               </CostLi>
             </ProductUl>
           </CostResume>
-        </OrderHistory>}
+        </OrderHistory>
+      )}
     </Container>
   );
 };

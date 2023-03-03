@@ -1,9 +1,15 @@
 import { CustomButton } from '../UI';
-import { CardContainer, CardSummaryContent, LiCard, RowCard, TotalCard, UlCard } from './CardSummaryElements';
+import {
+  CardContainer,
+  CardSummaryContent,
+  LiCard,
+  RowCard,
+  TotalCard,
+  UlCard,
+} from './CardSummaryElements';
 import { formatPrice } from '../../utils/formatPrice';
 
 export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
-
   return (
     <CardContainer>
       <CardSummaryContent>
@@ -14,11 +20,11 @@ export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
           </LiCard>
           <LiCard>
             <p>Costo de envío</p>
-            {
-              (subTotal !== 0)
-                ? (<span>{formatPrice(envio)}</span>)
-                : (<span>{formatPrice(envio = 0)}</span>)
-            }
+            {subTotal !== 0 ? (
+              <span>{formatPrice(envio)}</span>
+            ) : (
+              <span>{formatPrice((envio = 0))}</span>
+            )}
           </LiCard>
           <RowCard />
           <TotalCard>
@@ -27,7 +33,12 @@ export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
           </TotalCard>
         </UlCard>
 
-        <CustomButton onClick={handlerSubmit} w='100%' m='0px' disabled={isValid} >
+        <CustomButton
+          onClick={handlerSubmit}
+          w="100%"
+          m="0px"
+          disabled={isValid}
+        >
           Pagar
         </CustomButton>
       </CardSummaryContent>

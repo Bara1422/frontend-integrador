@@ -1,7 +1,7 @@
 import { Components } from '../../data/data';
 
 const INITIAL_STATE = {
-  components: Components
+  components: Components,
 };
 
 const productsReducer = (state = INITIAL_STATE, action) => {

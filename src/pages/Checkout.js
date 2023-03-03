@@ -25,7 +25,6 @@ const Checkout = () => {
       </Wrapper>
     </LayoutPage>
   );
-
 };
 
 export default Checkout;

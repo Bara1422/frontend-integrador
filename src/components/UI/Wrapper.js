@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { below } from '../../Styles/utilities';
 
 export const LayoutPage = styled.div`
-  
   padding-left: 20px;
   padding-right: 20px;
   display: flex;
@@ -36,4 +35,3 @@ export const Wrapper = styled.div`
     width: 100%;
   `}
 `;
-

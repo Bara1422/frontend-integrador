@@ -1,7 +1,7 @@
 import { arraySections } from '../../data/data';
 
 const INITIAL_STATE = {
-  categories: arraySections
+  categories: arraySections,
 };
 
 const categoriesReducer = (state = INITIAL_STATE, action) => {

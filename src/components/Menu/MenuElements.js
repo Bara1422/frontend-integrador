@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { below } from "../../Styles/utilities";
+import styled from 'styled-components';
+import { below } from '../../Styles/utilities';
 import { Title } from '../UI/Title';
 
 export const ComponentGrid = styled.div`
@@ -9,7 +9,7 @@ export const ComponentGrid = styled.div`
   text-align: center;
   justify-items: center;
   gap: 20px;
-  
+
   padding: 50px;
   ${below.xlarge`
     grid-template-columns:1fr 1fr;
@@ -86,7 +86,6 @@ export const ComponentCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `;
 export const AddToCardButton = styled.div`
   margin: 10px;
@@ -103,7 +102,6 @@ export const AddToCardButton = styled.div`
   }
   &:active {
     opacity: 1;
-    
   }
 `;
 
@@ -137,15 +135,15 @@ export const TagCard = styled.div`
   margin: 20px;
   align-items: center;
   justify-content: center;
-  background: ${({ selected }) => (selected ? "#e8e8e8" : "#fff")};
-color: #000;
-font-weight: bold;
-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.09);
-border-radius: 15px;
-padding: 1rem;
-cursor: pointer;
+  background: ${({ selected }) => (selected ? '#e8e8e8' : '#fff')};
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 15px;
+  padding: 1rem;
+  cursor: pointer;
   &:hover {
-  background: #e8e8e8;
-  box-shadow: none;
-}
+    background: #e8e8e8;
+    box-shadow: none;
+  }
 `;

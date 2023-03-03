@@ -1,7 +1,6 @@
-import styled from "styled-components";
-import { Title } from "../UI/Title";
+import styled from 'styled-components';
+import { Title } from '../UI/Title';
 import { ComponentLabel } from '../Menu/MenuElements';
-
 
 export const Dialog = styled.div`
   width: 500px;
@@ -57,15 +56,16 @@ export const DialogFooter = styled.div`
 `;
 
 export const ConfirmButton = styled(Title)`
-  
   margin: 10px;
   color: ${(props) => (props.disabled === 'disabled' ? '#979797' : '#fff')};
   height: auto;
   border-radius: 8px;
   padding: 10px;
   width: 200px;
-  cursor: ${(props) => (props.disabled === 'disabled' ? 'not-allowed' : 'pointer')};
-  background-color: ${(props) => (props.disabled === 'disabled' ? '#ccc' : 'red')};
+  cursor: ${(props) =>
+    props.disabled === 'disabled' ? 'not-allowed' : 'pointer'};
+  background-color: ${(props) =>
+    props.disabled === 'disabled' ? '#ccc' : 'red'};
   text-align: center;
   &:hover {
     opacity: 0.7;

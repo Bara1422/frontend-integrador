@@ -28,10 +28,10 @@ export const OrderHistory = styled.div`
 
 export const TitleContainerStyled = styled.div`
   width: 100%;
- display: flex;
- justify-content: center;
- font-weight: 700;
- font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.5rem;
   @media screen and (max-width: 650px) {
     grid-area: resumen;
   }
@@ -93,7 +93,7 @@ export const ProductLi = styled.li`
   justify-content: space-between;
   margin: 10px 0;
   border-bottom: 1px solid #eee;
-   &:last-child {
+  &:last-child {
     border-bottom: none;
   }
 `;

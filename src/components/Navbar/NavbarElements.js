@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { below } from '../../Styles/utilities';
 
-
 export const NavbarStyled = styled.div`
   padding: 20px;
   position: fixed;
@@ -21,7 +20,6 @@ export const NavbarStyled = styled.div`
   `}
 `;
 
-
 export const Logo = styled.img`
   max-width: 50px;
   margin-left: 2rem;
@@ -35,8 +33,6 @@ export const Logo = styled.img`
     height:auto;
   `}
 `;
-
-
 
 export const Divider = styled.div`
   display: inline-block;
@@ -54,11 +50,11 @@ export const LoginButton = styled.button`
   height: 35px;
   margin: 0 5px;
   font-family: 'Roboto', sans-serif;
-  border: 1px solid #BC02CB;
+  border: 1px solid #bc02cb;
   background-color: #000;
   &:hover {
-    color: #BC02CB;
-    border: 1px solid #fff
+    color: #bc02cb;
+    border: 1px solid #fff;
   }
 `;
 
@@ -91,7 +87,7 @@ export const LinkStyled = styled(Link)`
     align-items: flex-end;
     color: #fff;
     &:hover {
-      color: #BC02CB;
+      color: #bc02cb;
       transition: 0.5s;
     }
     ${below.large`

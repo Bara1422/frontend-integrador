@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { below } from "../../Styles/utilities";
+import styled from 'styled-components';
+import { below } from '../../Styles/utilities';
 
 export const FooterContainerStyled = styled.section`
   border-top: 2px #fff solid;
@@ -28,7 +28,6 @@ export const FooterMenuStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    
   }
   li {
     list-style: none;
@@ -37,8 +36,8 @@ export const FooterMenuStyled = styled.div`
     color: #fff;
     text-decoration: none;
     &:hover {
-      color: #BC02CB;
-    text-decoration: none
+      color: #bc02cb;
+      text-decoration: none;
     }
   }
 `;
@@ -55,9 +54,9 @@ export const CopyrightStyled = styled.section`
   h6 {
     font-size: 0.8rem;
   }
-  div{
+  div {
     margin-bottom: 10px;
-    a{
+    a {
       margin-left: 10px;
       color: white;
       &:hover {
@@ -65,5 +64,4 @@ export const CopyrightStyled = styled.section`
       }
     }
   }
-`
-
+`;

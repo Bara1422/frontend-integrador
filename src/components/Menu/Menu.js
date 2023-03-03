@@ -21,20 +21,17 @@ export const Menu = ({ onProductAdd }) => {
   const dispatch = useDispatch();
   const [section, setSection] = useState(null);
 
-
   if (cates.isLoading === false && products.isLoading === false) {
-
     const addToOrder = (components) => {
       dispatch(cartActions.addItem(components));
-      toast.success('Item agregado al carrito',
-        {
-          style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-          },
-        }
-      );
+      toast.success('Item agregado al carrito', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+
       onProductAdd();
     };
 
@@ -51,48 +48,45 @@ export const Menu = ({ onProductAdd }) => {
     }
 
     return (
-      <ComponentsStyled  >
-        <h2 >NUESTROS PRODUCTOS</h2>
-        <TagsMenu >
+      <ComponentsStyled>
+        <h2>NUESTROS PRODUCTOS</h2>
+        <TagsMenu>
           {section && (
             <TagCard onClick={() => setSection(null)}>
               <p>Todos</p>
             </TagCard>
           )}
-          {cates.data.map(category => (
+          {cates.data.map((category) => (
             <TagCard
               onClick={() => setSection(category.id)}
               selected={category.id === section}
               key={category.id}
-
             >
               <p>{category.category}</p>
             </TagCard>
           ))}
         </TagsMenu>
-        <ComponentGrid >
-          {
-            Object.entries(Products).map(([sectionName, components]) => {
-              return (
-                <React.Fragment key={`${sectionName}-${components[0].category}`}>
-                  {components.map((components) => (
-                    <ComponentCard key={`${sectionName}-${components.id}`}>
-                      <Component img={components.imgUrl} >
-                        <h5>{components.name}</h5>
-                        <p>{formatPrice(components.price)}</p>
-                        <AddToCardButton onClick={() => addToOrder(components)}>Agregar al carrito</AddToCardButton>
-                      </Component>
-                    </ComponentCard>
-                  ))}
-                </React.Fragment>
-              );
-            })
-          }
+        <ComponentGrid>
+          {Object.entries(Products).map(([sectionName, components]) => {
+            return (
+              <React.Fragment key={`${sectionName}-${components[0].category}`}>
+                {components.map((components) => (
+                  <ComponentCard key={`${sectionName}-${components.id}`}>
+                    <Component img={components.imgUrl}>
+                      <h5>{components.name}</h5>
+                      <p>{formatPrice(components.price)}</p>
+                      <AddToCardButton onClick={() => addToOrder(components)}>
+                        Agregar al carrito
+                      </AddToCardButton>
+                    </Component>
+                  </ComponentCard>
+                ))}
+              </React.Fragment>
+            );
+          })}
         </ComponentGrid>
-        <Toaster
-          position='bottom-center'
-        />
-      </ComponentsStyled >
+        <Toaster position="bottom-center" />
+      </ComponentsStyled>
     );
   }
 };

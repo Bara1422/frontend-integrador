@@ -1,7 +1,18 @@
 import React from 'react';
 import { formatPrice } from '../../utils/formatPrice';
-import { OrderContent, OrderStyled, OrderContainer, OrderItem, ItemImg, ClearCartButton } from './OrderElements';
-import { DialogFooter, ConfirmButton, DialogShadow } from '../ComponentDialog/ComponentDialogElements';
+import {
+  OrderContent,
+  OrderStyled,
+  OrderContainer,
+  OrderItem,
+  ItemImg,
+  ClearCartButton,
+} from './OrderElements';
+import {
+  DialogFooter,
+  ConfirmButton,
+  DialogShadow,
+} from '../ComponentDialog/ComponentDialogElements';
 import { useSelector, useDispatch } from 'react-redux';
 import { QuantityManage } from './QuantityManage';
 import * as cartActions from '../../redux/cart/cart-actions';
@@ -9,11 +20,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Spinner } from '@chakra-ui/react';
 
-
 export const Order = () => {
   const { loading, currentUser } = useAuth();
-  const hidden = useSelector(state => state.cart.hidden);
-  const cartItems = useSelector(state => state.cart.cartItems);
+  const hidden = useSelector((state) => state.cart.hidden);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const navigate = useNavigate();
   const total = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity;
@@ -29,7 +39,7 @@ export const Order = () => {
 
   const handleToggle = () => {
     dispatch(cartActions.toggleCartHidden());
-    if (authData !== null | currentUser) {
+    if ((authData !== null) | currentUser) {
       navigate('/checkout');
     } else {
       navigate('/login');
@@ -44,41 +54,41 @@ export const Order = () => {
     <>
       {hidden && <DialogShadow onClick={handleToggleCart} />}
       <OrderStyled show={hidden}>
-
         <OrderContent>
           <OrderContainer>
             Tu pedido:
-            {
-              cartItems?.length === 0 ? (
-                <ClearCartButton disabled={'disabled'}>Vaciar carrito</ClearCartButton>
-              ) : (<ClearCartButton onClick={handleClearCart}>Vaciar carrito</ClearCartButton>)
-            }
+            {cartItems?.length === 0 ? (
+              <ClearCartButton disabled={'disabled'}>
+                Vaciar carrito
+              </ClearCartButton>
+            ) : (
+              <ClearCartButton onClick={handleClearCart}>
+                Vaciar carrito
+              </ClearCartButton>
+            )}
           </OrderContainer>
-          {
-            cartItems.map(item => (
-              <OrderContainer key={item.id} >
-                <OrderItem>
-                  <ItemImg img={item.imgUrl} />
-                  <div>
-                    <div>{item.name}</div>
-                    <p>{formatPrice(item.price * item.quantity)}</p>
-                  </div>
-                  <QuantityManage item={item} />
-                </OrderItem>
-              </OrderContainer>
-            ))
-          }
+          {cartItems.map((item) => (
+            <OrderContainer key={item.id}>
+              <OrderItem>
+                <ItemImg img={item.imgUrl} />
+                <div>
+                  <div>{item.name}</div>
+                  <p>{formatPrice(item.price * item.quantity)}</p>
+                </div>
+                <QuantityManage item={item} />
+              </OrderItem>
+            </OrderContainer>
+          ))}
         </OrderContent>
 
         <DialogFooter>
           <Link to={authData ? '/checkout' : '/login'} onClick={handleToggle}>
-            {
-              cartItems?.length !== 0 && <ConfirmButton >{loading ? <Spinner /> : 'Ir a pagar'}  {formatPrice(total)}</ConfirmButton>
-            }
+            {cartItems?.length !== 0 && (
+              <ConfirmButton>
+                {loading ? <Spinner /> : 'Ir a pagar'} {formatPrice(total)}
+              </ConfirmButton>
+            )}
           </Link>
-
-
-
         </DialogFooter>
       </OrderStyled>
     </>

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const CustomButton = styled.button`
   margin: ${({ m }) => (m ? `${m}` : '10px')};
@@ -19,14 +19,14 @@ export const CustomButton = styled.button`
       border: 1px rgb(184, 182, 182) solid;
       cursor: not-allowed !important;
       transition: 0.5s ease-out;
-`}
+    `}
   &:hover {
-  opacity: 0.7;
-}
+    opacity: 0.7;
+  }
   &:active {
-  opacity: 1;
-}
+    opacity: 1;
+  }
   &:disabled {
-  opacity: 0.4;
-}
+    opacity: 0.4;
+  }
 `;

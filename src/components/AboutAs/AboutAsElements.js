@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { below } from "../../Styles/utilities";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { below } from '../../Styles/utilities';
 
 export const AboutAsStyled = styled.div`
   text-align: center;
@@ -27,5 +27,5 @@ export const AboutAsStyled = styled.div`
 `;
 
 export const LinkAsStyled = styled(Link)`
-  color: #BC02CB;
+  color: #bc02cb;
 `;

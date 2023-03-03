@@ -30,17 +30,17 @@ export const FormSectionStyled = styled.div`
 `;
 
 export const InputCheckoutStyled = styled.input`
-margin-bottom: 0.5rem;
-border-radius: 5px;
-padding-left: 10px;
-background-color: #f4f4f4;
-outline: none;
-color: #000;
-border: 2px #ddd solid;
-padding: 7px;
-&::placeholder {
-  color: #ccc;
-}
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  padding-left: 10px;
+  background-color: #f4f4f4;
+  outline: none;
+  color: #000;
+  border: 2px #ddd solid;
+  padding: 7px;
+  &::placeholder {
+    color: #ccc;
+  }
 `;
 
 export const FormTitle = styled.p`

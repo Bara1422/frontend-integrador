@@ -12,7 +12,6 @@ import Login from './pages/Login';
 import { useAuth } from './context/AuthContext';
 import { authData } from './utils/authData';
 
-
 function App() {
   const { authCheckState, currentUser } = useAuth();
 
@@ -27,17 +26,30 @@ function App() {
       <Navbar />
       <Order />
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/products' element={<Products />}></Route>
-        <Route path='/checkout' element={currentUser || authData ? <Checkout /> : <Navigate to='/login' />}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/mis-ordenes' element={currentUser || authData ? <Orders /> : <Navigate to='/login' />}></Route>
-        <Route path={`/mis-ordenes/:orderId/order-items`} element={currentUser || authData ? <Resume /> : <Navigate to='/login' />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/products" element={<Products />}></Route>
+        <Route
+          path="/checkout"
+          element={
+            currentUser || authData ? <Checkout /> : <Navigate to="/login" />
+          }
+        ></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route
+          path="/mis-ordenes"
+          element={
+            currentUser || authData ? <Orders /> : <Navigate to="/login" />
+          }
+        ></Route>
+        <Route
+          path={`/mis-ordenes/:orderId/order-items`}
+          element={
+            currentUser || authData ? <Resume /> : <Navigate to="/login" />
+          }
+        ></Route>
       </Routes>
     </>
-
-
   );
-};
+}
 
 export default App;

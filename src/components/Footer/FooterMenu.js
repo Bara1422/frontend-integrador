@@ -16,10 +16,12 @@ const FooterMenu = () => {
             smooth={true}
             duration={500}
             style={{ cursor: 'pointer' }}
-          >Nosotros</LinkScroll>
+          >
+            Nosotros
+          </LinkScroll>
         </li>
         <li>
-          <LinkStyled to='/products'>Productos</LinkStyled>
+          <LinkStyled to="/products">Productos</LinkStyled>
         </li>
         <li>
           <LinkScroll
@@ -29,7 +31,9 @@ const FooterMenu = () => {
             smooth={true}
             duration={500}
             style={{ cursor: 'pointer' }}
-          >Contacto</LinkScroll>
+          >
+            Contacto
+          </LinkScroll>
         </li>
       </ul>
     </FooterMenuStyled>
