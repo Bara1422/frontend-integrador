@@ -19,7 +19,7 @@ export const Menu = ({ onProductAdd }) => {
   const cates = useCategories();
   let products = useProducts();
   const dispatch = useDispatch();
-  const [section, setSection] = useState(null);
+  const [section, setSection] = useState('');
 
   if (cates.isLoading === false && products.isLoading === false) {
     const addToOrder = (components) => {
