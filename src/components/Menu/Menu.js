@@ -35,7 +35,7 @@ export const Menu = ({ onProductAdd }) => {
       onProductAdd();
     };
 
-    let Products = products.data.reduce((res, comp) => {
+    let Products = products?.data?.reduce((res, comp) => {
       if (!res[comp.categoryId]) {
         res[comp.categoryId] = [];
       }
@@ -56,7 +56,7 @@ export const Menu = ({ onProductAdd }) => {
               <p>Todos</p>
             </TagCard>
           )}
-          {cates.data.map((category) => (
+          {cates?.data?.map((category) => (
             <TagCard
               onClick={() => setSection(category.id)}
               selected={category.id === section}
@@ -68,6 +68,7 @@ export const Menu = ({ onProductAdd }) => {
         </TagsMenu>
         <ComponentGrid>
           {Object.entries(Products).map(([sectionName, components]) => {
+            console.log(components);
             return (
               <React.Fragment key={`${sectionName}-${components[0].category}`}>
                 {components.map((components) => (
