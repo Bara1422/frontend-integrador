@@ -12,6 +12,7 @@ import OrdersBackground from '../assets/img/pc-escritorio.jpg';
 const Orders = () => {
   const { currentUser } = useAuth();
   const { data: ordersId, isLoading } = useOrdersById();
+  console.log(currentUser);
 
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const Orders = () => {
   return (
     <LayoutPage img={OrdersBackground}>
       <Wrapper>
-        {isLoading ? <Spinner></Spinner> : <MyOrders orders={ordersId} />}
+        {isLoading ? <Spinner /> : <MyOrders orders={ordersId} />}
       </Wrapper>
     </LayoutPage>
   );

@@ -77,7 +77,7 @@ const Login = () => {
   }, [currentUser, navigate]);
 
   const [errorMessage, setErrorMessage] = useState(null);
-  console.log(errorMessage);
+
   useEffect(() => {
     if (error) {
       toast.error(error[0]?.message, {
@@ -100,6 +100,7 @@ const Login = () => {
         })
         .catch((errorLogin) => {
           setErrorMessage(errorLogin);
+          console.log(errorMessage);
         });
     }
   };

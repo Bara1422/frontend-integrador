@@ -25,7 +25,7 @@ import { useEffect } from 'react';
 import { useOrdersById } from '../../hooks/useCategories';
 
 export const CheckoutForm = () => {
-  const { initPoint, createOrder } = useCreateOrder();
+  const { initPoint, createOrder, loading: isLoading } = useCreateOrder();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, currentUser } = useAuth();
   const stringData = localStorage.getItem('authData');
@@ -43,7 +43,7 @@ export const CheckoutForm = () => {
   });
 
   const itemReduce = item.flatMap((product) => (
-    <li>
+    <li key={product.title}>
       {product.title} <b>x{product.quantity}</b>
     </li>
   ));
@@ -124,6 +124,7 @@ export const CheckoutForm = () => {
         subTotal={subTotal}
         envio={COSTOENVIO}
         handlerSubmit={handlerSubmit}
+        isLoading={isLoading}
       />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -8,8 +8,15 @@ import {
   UlCard,
 } from './CardSummaryElements';
 import { formatPrice } from '../../utils/formatPrice';
+import { Spinner } from '@chakra-ui/react';
 
-export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
+export const CardSummary = ({
+  isValid,
+  envio,
+  subTotal,
+  handlerSubmit,
+  isLoading,
+}) => {
   return (
     <CardContainer>
       <CardSummaryContent>
@@ -39,7 +46,7 @@ export const CardSummary = ({ isValid, envio, subTotal, handlerSubmit }) => {
           m="0px"
           disabled={isValid}
         >
-          Pagar
+          {isLoading ? <Spinner size="xs" /> : 'Pagar'}
         </CustomButton>
       </CardSummaryContent>
     </CardContainer>

@@ -5,6 +5,7 @@ import { Navbar } from '../components/Navbar/Navbar';
 
 export const Products = () => {
   const [shake, setShake] = useState(false);
+
   const hanldeProductAdd = () => {
     setShake(true);
     setTimeout(() => {
@@ -14,6 +15,7 @@ export const Products = () => {
   return (
     <>
       <Navbar shake={shake} />
+
       <Menu onProductAdd={hanldeProductAdd} />
     </>
   );

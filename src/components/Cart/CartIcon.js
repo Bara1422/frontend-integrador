@@ -6,7 +6,7 @@ import {
   CartIconContainer,
 } from './CartIconElements';
 import { useDispatch, useSelector } from 'react-redux';
-import * as cartActions from '../../redux/cart/cart-actions';
+import { toggleCartHidden } from '../../redux/cart/cart-actions';
 import { useEffect, useRef } from 'react';
 import './cartIcon.css';
 
@@ -19,7 +19,7 @@ export const CartIcon = ({ shake }) => {
     }, 0)
   );
   const handlerToggle = () => {
-    dispatch(cartActions.toggleCartHidden());
+    dispatch(toggleCartHidden());
   };
 
   useEffect(() => {
@@ -29,13 +29,11 @@ export const CartIcon = ({ shake }) => {
   }, [shake]);
 
   return (
-    <div>
-      <CartIconContainer onClick={handlerToggle} ref={ref}>
-        <CartIconStyled>
-          <ShoppingIcon style={{ width: '24px', height: '24px' }} />
-        </CartIconStyled>
-        <ItemCount>{quantity}</ItemCount>
-      </CartIconContainer>
-    </div>
+    <CartIconContainer onClick={handlerToggle} ref={ref}>
+      <CartIconStyled>
+        <ShoppingIcon style={{ width: '24px', height: '24px' }} />
+      </CartIconStyled>
+      <ItemCount>{quantity}</ItemCount>
+    </CartIconContainer>
   );
 };

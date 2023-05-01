@@ -3,9 +3,10 @@ import { useAxios } from '../context/AxiosContext';
 
 export const useCreateOrder = () => {
   const [initPoint, setInitPoint] = useState('');
-  const [ola, setOla] = useState('');
+  const [loading, setLoading] = useState(false);
   const axios = useAxios();
   const createOrder = async (userId, domicilio, localidad, items, subtotal) => {
+    setLoading(true);
     try {
       const response = await axios.post('orders', {
         userId: userId,
@@ -19,14 +20,15 @@ export const useCreateOrder = () => {
         total: subtotal + 250,
       });
       const { data: respuesta } = response;
+      console.log(respuesta);
 
       setInitPoint(respuesta.data.result.init_point);
-
-      setOla(response);
       return respuesta;
     } catch (error) {
       console.error(error.response.data);
+    } finally {
+      setLoading(false);
     }
   };
-  return { createOrder, initPoint, ola };
+  return { createOrder, initPoint, loading };
 };
