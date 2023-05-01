@@ -48,7 +48,11 @@ export const Component = styled.div`
   h5 {
     font-size: 15px;
     padding: 5px;
+    ${below.small`
+    font-size: 12px;
+  `}
   }
+
   p {
     color: green;
     font-weight: bold;
