@@ -15,7 +15,7 @@ import { authData } from './utils/authData';
 function App() {
   const { authCheckState, currentUser } = useAuth();
 
-  console.log(currentUser, authData);
+
   useEffect(() => {
     authCheckState();
   }, [authCheckState]);

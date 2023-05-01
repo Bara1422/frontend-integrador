@@ -81,7 +81,7 @@ function useProvideAuth() {
         checkAuthTimeout(response.data.result.expiresIn);
         history('/');
       } catch (error) {
-        console.log(error);
+       
         setLoading(false);
         let err = error;
         console.log(err);

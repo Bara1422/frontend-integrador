@@ -110,7 +110,6 @@ const Contact = () => {
             const getValuess = JSON.stringify(
               getValues(['nombre', 'email', 'mensaje'])
             );
-            console.log(getValuess);
           }}
         >
           Enviar

@@ -68,7 +68,6 @@ export const Menu = ({ onProductAdd }) => {
         </TagsMenu>
         <ComponentGrid>
           {Object.entries(Products).map(([sectionName, components]) => {
-            console.log(components);
             return (
               <React.Fragment key={`${sectionName}-${components[0].category}`}>
                 {components.map((components) => (

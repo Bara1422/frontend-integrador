@@ -121,9 +121,6 @@ const Login = () => {
     }
   };
 
-  console.log(error);
-  console.log(formState);
-  console.log(errorMessage);
   return (
     <LayoutPage img={LoginBg}>
       <Wrapper>
